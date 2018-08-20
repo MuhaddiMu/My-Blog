@@ -10,13 +10,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://tinyurl.com/y6uo9kku">
     <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="http://127.0.0.1/Code/My%20Blog/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://127.0.0.1/Code/My-Blog/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- animation CSS -->
-    <link href="http://127.0.0.1/Code/My%20Blog/Admin/css/animate.css" rel="stylesheet">
+    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="http://127.0.0.1/Code/My%20Blog/Admin/css/style.css" rel="stylesheet">
+    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/style.css" rel="stylesheet">
     <!-- color CSS -->
-    <link href="http://127.0.0.1/Code/My%20Blog/Admin/css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/colors/default.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,9 +38,9 @@
         </div>
     </section>
     <!-- jQuery -->
-    <script src="http://127.0.0.1/Code/My%20Blog/Admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="http://127.0.0.1/Code/My-Blog/Admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="http://127.0.0.1/Code/My%20Blog/Admin/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="http://127.0.0.1/Code/My-Blog/Admin/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
