@@ -26,13 +26,11 @@
                             <h3 class="box-title"><i class="fa fa-plus"></i> Add New Tag</h3>
                             <div class="form-group">
                                 <div class="col-md-5">
-                                    <label class="">Tag</label>
                                     <input type="text" placeholder="Motivation" class="form-control form-control-line">
                                 </div>
                         
                                 <div class="col-md-2">
-                                    <label>&nbsp;</label>
-                                    <button style="border-radius: 3px;" type="submit" class="btn btn-success form-control waves-effect">Add Tag</button>
+                                    <button type="submit" class="btn btn-success waves-effect">Add Tag</button>
                                 </div>
                             </div>
                         </div>

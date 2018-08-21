@@ -94,6 +94,9 @@
                         <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
                     </li>
                     <li>
+                        <a href="post.php" class="waves-effect"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Post</a>
+                    </li>
+                    <li>
                         <a href="basic-table.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Basic Table</a>
                     </li>
                     <li>
