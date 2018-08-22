@@ -21,7 +21,7 @@
                     <!-- /.col-lg-12 -->
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-md-12">
                         <div class="col-md-12 white-box">
                             <h3 class="box-title"><i class="fa fa-plus"></i> Add New Tag</h3>
                             <div class="form-group">
@@ -53,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             <!-- /.container-fluid -->
             <footer class="footer text-center"> <?php echo date('Y'); ?> &copy; Muhaddis  </footer>
         </div>
