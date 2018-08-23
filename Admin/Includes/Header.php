@@ -97,7 +97,10 @@
                         <a href="post.php" class="waves-effect"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Post</a>
                     </li>
                     <li>
-                        <a href="basic-table.php" class="waves-effect"><i class="fa fa-table fa-fw" aria-hidden="true"></i>Basic Table</a>
+                        <a href="comments.php" class="waves-effect"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comments</a>
+                    </li>
+                    <li>
+                        <a href="users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
                     </li>
                     <li>
                         <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Icons</a>

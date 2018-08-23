@@ -27,57 +27,56 @@
                     <div class="col-sm-12">
                         <div class="white-box">
                             <h3 class="box-title">Basic Table</h3>
-                            <p class="text-muted">Add class <code>.table</code></p>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>Thumbnail</th>
+                                            <th>Full Name</th>
                                             <th>Username</th>
                                             <th>Role</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="UsrImg">
                                         <tr>
                                             <td>1</td>
-                                            <td>Deshmukh</td>
+                                            <td><img src="plugins/images/users/varun.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Prohaska</td>
                                             <td>@Genelia</td>
                                             <td>admin</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
-                                            <td>Deshmukh</td>
+                                            <td><img src="plugins/images/users/genu.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Gaylord</td>
                                             <td>@Ritesh</td>
                                             <td>member</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
-                                            <td>Sanghani</td>
+                                            <td><img src="plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Gusikowski</td>
                                             <td>@Govinda</td>
                                             <td>developer</td>
                                         </tr>
                                         <tr>
                                             <td>4</td>
-                                            <td>Roshan</td>
+                                            <td><img src="plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Rogahn</td>
                                             <td>@Hritik</td>
                                             <td>supporter</td>
                                         </tr>
                                         <tr>
                                             <td>5</td>
-                                            <td>Joshi</td>
+                                            <td><img src="plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Hickle</td>
                                             <td>@Maruti</td>
                                             <td>member</td>
                                         </tr>
                                         <tr>
                                             <td>6</td>
-                                            <td>Nigam</td>
+                                            <td><img src="plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"></td>
                                             <td>Eichmann</td>
                                             <td>@Sonu</td>
                                             <td>supporter</td>
