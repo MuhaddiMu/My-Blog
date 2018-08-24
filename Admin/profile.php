@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="plugins/bower_components/bootstrap-form-helper/dist/js/bootstrap-formhelpers.min.js"></script>
 
+
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
@@ -54,14 +55,22 @@
                                         <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="example-email" class="col-md-12">Email</label>
+                                    <label class="col-md-12">Email</label>
                                     <div class="col-md-12">
-                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="example-email" id="example-email"> </div>
+                                        <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line"> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-md-12">Username</label>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Drakemesk" class="form-control form-control-line"> 
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Phone No</label>
                                     <div class="col-md-12">
-                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line"> </div>
+                                        <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-12">Message</label>
@@ -92,19 +101,25 @@
                                 <div class="form-group">
                                     <label class="col-md-12">Current Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
-                                </div>
+                                        <input id="CPass" type="password" class="form-control-line">
+                                        <span toggle="#CPass" class="fa fa-fw fa-eye field-icon CPass"></span>
+                                    </div>
+                                </div>                        
                                 
                                 <div class="form-group">
                                     <label class="col-md-12">New Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input id="NPass" type="password" class="form-control-line">
+                                        <span toggle="#NPass" class="fa fa-fw fa-eye field-icon NPass"></span>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label class="col-md-12">Confirm New Password</label>
                                     <div class="col-md-12">
-                                        <input type="password" class="form-control form-control-line"> </div>
+                                        <input id="CNPass" type="password" class="form-control-line">
+                                        <span toggle="#CNPass" class="fa fa-fw fa-eye field-icon CNPass"></span>
+                                    </div>
                                 </div>
                                 
                                 <div class="form-group">
@@ -124,6 +139,42 @@
             <footer class="footer text-center"> <?php echo date('Y'); ?> &copy; Muhaddis  </footer>
         </div>
         <!-- /#page-wrapper -->
+<script>
+
+    $(".CPass").click(function() {
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+});
+    
+    
+    $(".NPass").click(function() {
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+});
+    
+    
+    $(".CNPass").click(function() {
+	$(this).toggleClass("fa-eye fa-eye-slash");
+	var input = $($(this).attr("toggle"));
+	if (input.attr("type") == "password") {
+		input.attr("type", "text");
+	} else {
+		input.attr("type", "password");
+	}
+});
+
+</script>
+
 <?php 
     
     include("Includes/Footer.php");
