@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://tinyurl.com/y6uo9kku">
+    <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
     <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -56,10 +56,10 @@
                     <!-- Logo -->
                     <a class="logo" href="index.php">
                         <!-- Logo icon image, you can use font-icon also --><b>
-                        <!--This is dark logo icon--><img src="plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+                        <!--This is dark logo icon--><img src="plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="plugins/images/admin-logo.png" width="30" alt="home" class="light-logo" />
                      </b>
                         <!-- Logo text image you can use text also --><span class="hidden-xs">
-                        <!--This is dark logo text--><img src="plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                        <!--This is dark logo text--><img src="plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="plugins/images/admin-text.png" alt="home" class="light-logo" width="70%" />
                      </span> </a>
                 </div>
                 <!-- /Logo -->
@@ -93,6 +93,9 @@
                     <li>
                         <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
                     </li>
+                     <li>
+                        <a href="users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
+                    </li>
                     <li>
                         <a href="post.php" class="waves-effect"><i class="fa fa-list-alt fa-fw" aria-hidden="true"></i>Post</a>
                     </li>
@@ -100,24 +103,11 @@
                         <a href="comments.php" class="waves-effect"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comments</a>
                     </li>
                     <li>
-                        <a href="users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
-                    </li>
-                    <li>
-                        <a href="fontawesome.php" class="waves-effect"><i class="fa fa-font fa-fw" aria-hidden="true"></i>Icons</a>
-                    </li>
-                    <li>
-                        <a href="map-google.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Google Map</a>
-                    </li>
-                    <li>
                         <a href="tags.php" class="waves-effect"><i class="fa fa-tags fa-fw" aria-hidden="true"></i>Tags</a>
                     </li>
                     <li>
-                        <a href="blank.php" class="waves-effect"><i class="fa fa-columns fa-fw" aria-hidden="true"></i>Blank Page</a>
+                        <a href="settings.php" class="waves-effect"><i class="fa fa-cogs fa-fw" aria-hidden="true"></i>Site Settings</a>
                     </li>
-                    <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>Error 404</a>
-                    </li>
-
                 </ul>
                 <div class="center p-20">
                      <a href="https://Muhaddis.Info" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Muhaddis</a>

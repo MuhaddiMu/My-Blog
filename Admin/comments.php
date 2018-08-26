@@ -12,7 +12,6 @@
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                         <h4 class="page-title">Blank Page</h4> </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                        <a href="https://wrappixel.com/templates/ampleadmin/" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
                         <ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
                             <li class="active">Blank Page</li>
@@ -27,22 +26,25 @@
                             <div class="comment-center p-t-10">
                                 <div class="comment-body">
                                     <div class="mail-contnet">
-                                        <h5><b>Pavan kumar</b></h5><span class="time">10:20 AM   20  may 2016</span><br><span class="time"><b>Title Of My Post</b></span>
-                                        <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
+                                        <h5><b>Pavan kumar</b></h5><span class="time"><b>Title Of My Post</b></span><br>
+                                        <span class="time">10:20 AM   20  may 2016</span><br/>
+                                        <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
                                         <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
                                     </div>
                                 </div>
                                 <div class="comment-body">
                                     <div class="mail-contnet">
-                                        <h5><b>Sonu Nigam</b></h5><span class="time">10:20 AM   20  may 2016</span><br><span class="time"><b>Title Of My Post</b></span>
-                                        <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
+                                        <h5><b>Sonu Nigam</b></h5><span class="time"><b>Title Of My Post</b></span><br>
+                                        <span class="time">10:20 AM   20  may 2016</span><br/>
+                                        <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
                                         <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
                                     </div>
                                 </div>
                                 <div class="comment-body b-none">
                                     <div class="mail-contnet">
-                                        <h5><b>Arijit singh</b></h5><span class="time">10:20 AM   20  may 2016</span><br><span class="time"><b>Title Of My Post</b></span>
-                                        <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
+                                        <h5><b>Arijit singh</b></h5><span class="time"><b>Title Of My Post</b></span><br>
+                                        <span class="time">10:20 AM   20  may 2016</span><br/>
+                                        <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
                                         <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
                                     </div>
                                 </div>
