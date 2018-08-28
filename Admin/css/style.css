@@ -12625,3 +12625,15 @@ overflow:hidden;
 -moz-transform:rotate(360deg);
 -o-transform:rotate(360deg);
 }
+
+#todo {
+    list-style: none;
+    padding-left: 0;
+    cursor: move;
+}
+
+#todo .EmptySpace {
+    background: #FC3;
+    border: dashed 2px #777;
+    height: 25px;
+}

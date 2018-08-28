@@ -3,6 +3,9 @@
     include("Includes/Header.php");
 
 ?>
+  
+
+
         <!-- ============================================================== -->
         <!-- Page Content -->
         <!-- ============================================================== -->
@@ -192,16 +195,16 @@
                                 <div class="panel-body">
                                     <form class="form-material" name="checkListForm">
                                         <div class="form-group">
-                                            <input  type="text" class="form-control form-control-line" name="Task" placeholder="Add Task..."/>
-                                            <br>
+                                            <input id="Task" type="text" class="form-control form-control-line" name="Task" placeholder="Add Task...">
+                                            <span class="error text-danger"></span><br>
                                             <div class="form-group">
-                                                <button id="add" class="Add btn btn-success waves-effect" type="button"> Add</button> 
+                                                <button class="Add btn btn-success waves-effect" type="button"> Add</button> 
                                             
-                                                <button id="clear" class="Clear btn btn-warning waves-effect" type="button"> Clear</button> 
+                                                <button class="Clear btn btn-warning waves-effect" type="button"> Clear</button> 
                                             </div> 
                                         </div>
                                     </form>
-                                        <div id="todo"></div>
+                                        <ul id="todo"></ul>
                                 </div>
                             </div>
                         </div>
@@ -215,21 +218,8 @@
         <!-- ============================================================== -->
         <!-- End Page Content -->
         <!-- ============================================================== -->
-
 <?php 
     
     include("Includes/Footer.php");
 
 ?>
-
-<script>
-$(document).ready(function () {
-    $('.Add').click(function () {
-        $('#todo').append("<div>" + $("input[name=Task]").val() + " <a href='#' class='rotate close' aria-hidden='true'>&times;</a></div><br>");
-    });
-    $("body").on('click', '#todo a', function () {
-        $(this).closest("div").remove();
-    });
-});
-    
-</script>

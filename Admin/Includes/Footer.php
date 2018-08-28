@@ -6,6 +6,7 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="plugins/bower_components/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Menu Plugin JavaScript -->
@@ -23,7 +24,7 @@
     <!-- Sparkline chart JavaScript -->
     <script src="plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="js/custom.min.js"></script>
+    <script src="js/custom.js"></script>
     <script src="js/dashboard1.js"></script>
     <script src="plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 </body>
