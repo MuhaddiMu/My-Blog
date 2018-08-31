@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
+    <title><?php echo (defined('TITLE')) ? TITLE . " &lsaquo;" : "" ?> Admin Panel &mdash; My Own Blog</title>
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Menu CSS -->
@@ -93,7 +93,7 @@
                     <li>
                         <a href="profile.php" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Profile</a>
                     </li>
-                     <li>
+                    <li>
                         <a href="users.php" class="waves-effect"><i class="fa fa-users fa-fw" aria-hidden="true"></i>Users</a>
                     </li>
                     <li>
@@ -110,10 +110,10 @@
                     </li>
                 </ul>
                 <div class="center p-20">
-                     <a href="https://Muhaddis.Info" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Muhaddis</a>
-                 </div>
+                    <a href="https://Muhaddis.Info" target="_blank" class="btn btn-danger btn-block waves-effect waves-light">Muhaddis</a>
+                </div>
             </div>
-            
+
         </div>
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->

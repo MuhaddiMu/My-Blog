@@ -3,15 +3,16 @@
 <title>Info Sec Blog</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <link rel="icon" type="image/png" sizes="16x16" href="Admin/plugins/images/favicon.png">
 
-
 <style>
-    body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+    body,h1,h2,h3,h4,h5 {
+        font-family: "Raleway", sans-serif
+    }
 </style>
 
 <body class="w3-light-grey">

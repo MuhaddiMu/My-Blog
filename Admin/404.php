@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="https://tinyurl.com/y6uo9kku">
-    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
+    <title>Error 404 &mdash; My Own Blog</title>
     <!-- Bootstrap Core CSS -->
     <link href="http://127.0.0.1/Code/My-Blog/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- animation CSS -->
@@ -34,7 +34,8 @@
                 <h3 class="text-uppercase">Page Not Found !</h3>
                 <p class="text-muted m-t-30 m-b-30">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
                 <a href="javascript: history.go(-1)" class="btn btn-danger btn-rounded waves-effect waves-light m-b-40">Back to home</a> </div>
-            <footer class="footer text-center"> <?php echo date('Y'); ?> &copy; Muhaddis  </footer>
+            <footer class="footer text-center">
+                <?php echo date('Y'); ?> &copy; Muhaddis </footer>
         </div>
     </section>
     <!-- jQuery -->
