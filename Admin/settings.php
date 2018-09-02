@@ -1,6 +1,8 @@
 <?php 
     define("TITLE", "Settings");
     include("Includes/Header.php");
+    include("Includes/Functions_Admin.php");
+    DisplayHomepageSettings();
 
 ?>
     <!-- ============================================================== -->
@@ -18,32 +20,37 @@
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
+                
             </div>
+                    <?php echo (isset($SettingsMsg)) ? $SettingsMsg : ""; ?>
             <div class="row">
                 <div class="col-md-6">
                     <div class="white-box">
-                        <h3 class="box-title"><i class="fa fa-home fa-fw"></i> Homepage Image</h3>
-                        <img src="https://www.w3schools.com/w3images/avatar_g.jpg" width="100%" class="img-fluid img-thumbnail" alt="Username">
+                        <h3 class="box-title"><i class="fa fa-home fa-fw"></i> Homepage</h3>
+                        <img src="<?php echo (isset($Img)) ? $Img : ""; ?>" width="100%" class="img-fluid img-thumbnail DisplayImage" alt="Username">
                         <br>
                         <br>
-                        <form class="form-material">
+                        <form method="post" action="" class="form-material" enctype="multipart/form-data">
                             <div class="form-group">
+                                <?php echo (isset($ImgError)) ? $ImgError : ""; ?>
                                 <label for="Main Image">Homepage Image</label>
-                                <input title="Main Image" id="Main Image" type="file" class="form-control">
+                                <input title="Main Image" name="MainImage" id="Main Image" type="file" class="form-control" onchange="DisplayImage(this)" accept=".bmp, .jpg, .png, .tiff">
                             </div>
 
                             <div class="form-group">
+                                <?php echo (isset($NameError)) ? $NameError : ""; ?>
                                 <label for="Name">Name</label>
-                                <input title="Name" id="Name" type="text" class="form-control form-control-line">
+                                <input title="Name" id="Name" type="text" class="form-control form-control-line" name="UserName" value="<?php echo (isset($Name)) ? $Name : ""; ?>">
                             </div>
 
                             <div class="form-group">
+                                <?php echo (isset($MessageError)) ? $MessageError : ""; ?>
                                 <label for="Msg">Message</label>
-                                <textarea id="Msg" rows="5" class="form-control form-control-line"></textarea>
+                                <textarea title="Message" id="Msg" rows="5" class="form-control form-control-line" name="Message"><?php echo (isset($Msg)) ? $Msg : ""; ?></textarea>
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success waves-effect">Update Profile</button>
+                                <button type="submit" class="btn btn-success waves-effect" name="UpdateProfile">Update Profile</button>
                             </div>
 
                         </form>
@@ -53,15 +60,16 @@
                 <div class="col-md-6">
                     <div class="white-box">
                         <h3 class="box-title"><i class="fa fa-info fa-fw" aria-hidden="true"></i> Description</h3>
-                        <form class="form-material">
+                        <form action="" method="post" class="form-material">
 
                             <div class="form-group">
+                                <?php echo (isset($DescriptionError)) ? $DescriptionError : ""; ?>
                                 <label for="Homepage Caption">Description</label>
-                                <textarea id="Homepage Caption" rows="5" class="form-control form-control-line"></textarea>
+                                <textarea title="Description" name="Description" id="Homepage Caption" rows="5" class="form-control form-control-line"><?php echo (isset($Description)) ? $Description : ""; ?></textarea>
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success waves-effect">Update Description</button>
+                                <button type="submit" name="UpdateDescription" class="btn btn-success waves-effect">Update Description</button>
                             </div>
 
                         </form>
@@ -71,20 +79,22 @@
                 <div class="col-md-6">
                     <div class="white-box">
                         <h3 class="box-title"><i class="fa fa-info fa-fw" aria-hidden="true"></i> Footer</h3>
-                        <form class="form-material">
+                        <form method="post" action="" class="form-material">
 
                             <div class="form-group">
+                                <?php echo (isset($FooterTextError)) ? $FooterTextError : ""; ?>
                                 <label for="FooterText">Footer Text</label>
-                                <input title="FooterText" id="FooterText" type="text" class="form-control form-control-line">
+                                <input name="FooterText" title="Fotter Text" id="FooterText" type="text" class="form-control form-control-line" value="<?php echo (isset($FooterText)) ? $FooterText : ""; ?>">
                             </div>
 
                             <div class="form-group">
+                                <?php echo (isset($FooterLinkError)) ? $FooterLinkError : ""; ?>
                                 <label for="FooterLink">Footer Link</label>
-                                <input title="FooterLink" id="FooterLink" type="text" class="form-control form-control-line">
+                                <input name="FooterLink" title="Footer Link" id="FooterLink" type="text" class="form-control form-control-line" value="<?php echo (isset($FooterLink)) ? $FooterLink : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success waves-effect">Update Footer</button>
+                                <button type="submit" class="btn btn-success waves-effect" name="UpdateFooter">Update Footer</button>
                             </div>
 
                         </form>
@@ -99,15 +109,16 @@
                         <br>
                         <br>
 
-                        <form class="form-material">
+                        <form action="" method="post" class="form-material">
 
                             <div class="form-group">
+                                <?php echo (isset($FaviconError)) ? $FaviconError : ""; ?>
                                 <label for="Favicon">Favicon Link 16&times;16</label>
-                                <input title="Favicon" id="Favicon" type="text" class="form-control form-control-line">
+                                <input name="Favicon" title="Favicon" id="Favicon" type="text" class="form-control form-control-line">
                             </div>
 
                             <div class="form-group">
-                                <button class="btn btn-success waves-effect">Update Favicon</button>
+                                <button type="submit" name="UpdateFavicon" class="btn btn-success waves-effect">Update Favicon</button>
                             </div>
 
                         </form>
@@ -127,3 +138,30 @@
     include("Includes/Footer.php");
 
 ?>
+<script>
+//Display Image On Selection
+function DisplayImage(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('.DisplayImage')
+                .attr('src', e.target.result)
+                .width('100%') ;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+//Feedback Notification
+$(document).ready(function() {
+    
+    setTimeout(function() {
+     $('.alert').addClass("bounceOutUp");
+    }, 3000)
+    
+    setTimeout(function() {
+     $('.alert').remove();
+    }, 4000)
+    
+});
+</script>

@@ -3,7 +3,6 @@
     include("Includes/Header.php");
     include("Includes/Functions_Admin.php");
 
-//Removing Tag
 if(isset($_GET['Delete'])){
     $Delete = ValidateFormData($_GET['Delete']);
     RemoveTags($Delete);

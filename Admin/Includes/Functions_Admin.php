@@ -136,9 +136,40 @@ if(isset($_POST['UpdateDescription'])){
         if($Connection->query($Query) === TRUE){
             $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Description Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         } else {
-            $TagsMessage = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         }
     } 
+}
+
+
+//Update Footer Link & Footer Text
+if(isset($_POST['UpdateFooter'])){
+    
+    $FooterText = $_POST['FooterText'];
+    $FooterLink = $_POST['FooterLink'];
+    
+    if(!$FooterText){
+        $FooterTextError = "<p class='text-danger'>Please Add Footer Text</p>";
+    } else {
+        $FooterText = ValidateFormData($FooterText);
+    }
+    
+    if(!$FooterLink){
+        $FooterLinkError = "<p class='text-danger'>Please Add Footer Link</p>";
+    } else {
+        $FooterLink = ValidateFormData($FooterLink);
+    }
+    
+    if($FooterText && $FooterLink){
+        //Update Footer In Database
+        $Query  = "UPDATE homepage SET Homepage_Footer_Link = '$FooterLink', Homepage_Footer_Text='$FooterText'";
+        if($Connection->query($Query) === TRUE){
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Footer Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        } else {
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        }
+       
+    }
 }
 
 
@@ -146,6 +177,8 @@ if(isset($_POST['UpdateDescription'])){
 function DisplayHomepageSettings(){
     global $Connection;
     global $Description;
+    global $FooterLink;
+    global $FooterText;
     global $Name;
     global $Img;
     global $Msg;
@@ -159,12 +192,31 @@ function DisplayHomepageSettings(){
             $Img         = $Row['Homepage_Image'];
             $Name        = $Row['Homepage_Name'];
             $Msg         = $Row['Homepage_Message'];
+            $FooterLink  = $Row['Homepage_Footer_Link'];
+            $FooterText  = $Row['Homepage_Footer_Text'];
         }
     }
 }
 
 
+//Save Favicon to Folder
+if(isset($_POST['UpdateFavicon'])){
+    $Favicon = $_POST['Favicon'];
+    $Headers = get_headers($Favicon, 1);
 
+    //URL Check and Image Validation Check
+    if (filter_var($Favicon, FILTER_VALIDATE_URL) && strpos($Headers['Content-Type'], 'image/') !== false){
+        $Content = file_get_contents($Favicon);
+        $SaveFav = 'plugins/images/favicon.png';
+
+        //Save Favicon in Directory.
+        if(file_put_contents($SaveFav, $Content)){
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Favicon Updated Successfully. Please Refresh Browser or clear cache and cookies.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        }  
+    } else {
+        $FaviconError = "<p class='text-danger'>Please Only Use Image URL for Favicon.</p>";
+    }
+}
 
 
 
