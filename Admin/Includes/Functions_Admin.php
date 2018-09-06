@@ -325,6 +325,63 @@ if(isset($_POST['UpdateUserProfile'])){
 }
 
 
+//Update User Password /Admin/Profile
+if (isset($_POST['UpdatePassword'])) {
+
+	$CPass = "";
+	$NPass = "";
+	$CNPass = "";
+
+	$CPass = $_POST['CPass'];
+	$NPass = $_POST['NPass'];
+	$CNPass = $_POST['CNPass'];
+
+	if (!$CPass) {
+		$CPassError = "<p class='text-danger'>Current Password is Required</p>";
+	}
+
+	if (!$NPass) {
+		$NPassError = "<p class='text-danger'>New Password is Required</p>";
+	}
+
+	if (!$CNPass) {
+		$CNPassError = "<p class='text-danger'>Confirm New Password is Required</p>";
+	}
+
+	if ($CPass && $NPass && $CNPass) {
+		//Select User Details from Database From Session Email (Later)
+		$Query = "SELECT * FROM account WHERE Email = 'Muhaddisshah@gmail.com'";
+		$Result = $Connection->query($Query);
+		if ($Result->num_rows > 0) {
+			while ($Row = $Result-> fetch_assoc()) {
+				$CurrentPasswordDB = $Row['Password'];
+			}
+		}
+
+		//Check If Current Password is Correct and Update New Password to Session Email (Later)
+		if (password_verify($CPass, $CurrentPasswordDB)) {
+
+			//Check if New Password and Confirm New Password are Correct
+			if ($NPass === $CNPass) {
+				//Hash New Password and Insert into databse.
+				$HashPassword = password_hash($CPass, PASSWORD_DEFAULT);
+
+				$Query = "UPDATE account SET Password = '$HashPassword' WHERE Email = 'Muhaddisshah@gmail.com'";
+				if ($Connection->query($Query) === TRUE) {
+					$ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Password Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+				} else {
+					$ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error'.$Connection-> error.
+					'<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+				}
+			} else {
+				$NPassError = "<p class='text-danger'><strong>New Password</strong> and <strong>Confirm New Password</strong> do not Match.</p>";
+			}
+		} else {
+			$CPassError = "<p class='text-danger'>Current Password is Incorrect.</p>";
+		}
+	}
+}
+
 
 //Select Account Details of Specific User Session Email or ID (Later)
 function DisplayAccountDetails(){

@@ -106,25 +106,28 @@
                         <form method="post" action="" class="form-horizontal form-material">
 
                             <div class="form-group">
+                                <?php echo (isset($CPassError)) ? $CPassError : ""; ?>
                                 <label class="col-md-12">Current Password</label>
                                 <div class="col-md-12">
-                                    <input name="CPass" id="CPass" type="password" class="form-control-line">
+                                    <input name="CPass" id="CPass" type="password" class="form-control-line" required>
                                     <span toggle="#CPass" class="fa fa-fw fa-eye field-icon CPass"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <?php echo (isset($NPassError)) ? $NPassError : ""; ?>
                                 <label class="col-md-12">New Password</label>
                                 <div class="col-md-12">
-                                    <input name="NPass" id="NPass" type="password" class="form-control-line">
+                                    <input name="NPass" id="NPass" type="password" class="form-control-line" required>
                                     <span toggle="#NPass" class="fa fa-fw fa-eye field-icon NPass"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
+                                <?php echo (isset($CNPassError)) ? $CNPassError : ""; ?>
                                 <label class="col-md-12">Confirm New Password</label>
                                 <div class="col-md-12">
-                                    <input name="CNPass" id="CNPass" type="password" class="form-control-line">
+                                    <input name="CNPass" id="CNPass" type="password" class="form-control-line" required>
                                     <span toggle="#CNPass" class="fa fa-fw fa-eye field-icon CNPass"></span>
                                 </div>
                             </div>
@@ -166,4 +169,21 @@ $(document).ready(function() {
     }, 4000)
     
 });
+    
+    
+//Match New Password and Confirm New Password
+var NPass = document.getElementById("NPass")
+  , CNPass = document.getElementById("CNPass");
+
+function validatePassword(){
+  if(NPass.value != CNPass.value) {
+    CNPass.setCustomValidity("Passwords Don't Match");
+  } else {
+    CNPass.setCustomValidity('');
+  }
+}
+
+NPass.onchange = validatePassword;
+CNPass.onkeyup = validatePassword;
+    
 </script>
