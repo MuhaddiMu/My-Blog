@@ -12,7 +12,17 @@ function ValidateFormData($FormData){
 }
 
 
-//Insert Tags to Databse in /Admin/Tags.php
+//Grab Image From Gravatar
+function GravatarImage($Email){
+    $Size = 150;
+    $Default = "";
+    $Grav_Url = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $Email ) ) ) . "?d=" . urlencode( $Default ) . "&s=" . $Size;
+    return $Grav_Url;
+}
+
+
+
+//Insert Tags to Databse in /Admin/Tags
 if(isset($_POST['Submit'])){
     $Tag = $_POST['Tag'];
     
@@ -32,7 +42,7 @@ if(isset($_POST['Submit'])){
 }
 
 
-//Displaying and Showing Tags in /Admin/Tags.php
+//Displaying and Showing Tags in /Admin/Tags
 function DisplayTags(){
     global $Connection;
     
@@ -49,7 +59,7 @@ function DisplayTags(){
 }
 
 
-//Remove Tags /Admin/Tags.php
+//Remove Tags /Admin/Tags
 function RemoveTags($Delete){
     global $Connection;
     
@@ -64,7 +74,7 @@ function RemoveTags($Delete){
 }
 
 
-//Update Profile On /Admin/Settings.php
+//Update Profile On /Admin/Settings
 if (isset($_POST['UpdateProfile'])) {
     
     //Getting Image
@@ -122,7 +132,7 @@ if (isset($_POST['UpdateProfile'])) {
 }
 
 
-//Update Description /Admin/Settings.php
+//Update Description /Admin/Settings
 if(isset($_POST['UpdateDescription'])){
     $Description = $_POST['Description'];
     
@@ -142,7 +152,7 @@ if(isset($_POST['UpdateDescription'])){
 }
 
 
-//Update Footer Link & Footer Text
+//Update Footer Link & Footer Text /Admin/Settings
 if(isset($_POST['UpdateFooter'])){
     
     $FooterText = $_POST['FooterText'];
@@ -173,7 +183,7 @@ if(isset($_POST['UpdateFooter'])){
 }
 
 
-//Display  Contents /Admin/Settings.php
+//Display  Contents /Admin/Settings
 function DisplayHomepageSettings(){
     global $Connection;
     global $Description;
@@ -199,7 +209,7 @@ function DisplayHomepageSettings(){
 }
 
 
-//Save Favicon to Folder
+//Save Favicon to Folder /Admin/Settings
 if(isset($_POST['UpdateFavicon'])){
     $Favicon = $_POST['Favicon'];
     $Headers = get_headers($Favicon, 1);
@@ -219,7 +229,127 @@ if(isset($_POST['UpdateFavicon'])){
 }
 
 
+//Update User Profile Details /Admin/Profile
+if(isset($_POST['UpdateUserProfile'])){
+    
+    $Name       = $_POST['Fullname'];
+    //$Email      = $_POST['Email'];
+    //$Username   = $_POST['Username'];
+    $Phone      = $_POST['Phone'];
+    $Message    = $_POST['Message'];
+    $Country    = $_POST['Country'];  
+    
+   /* //Get Email From Databse
+    $DBEmail     = ValidateFormData($Email);
+    $QueryEmail  = "SELECT * FROM account WHERE Email = '$DBEmail'";
+    $ResultEmail = $Connection->query($QueryEmail);*/
 
+    
+    if(!$Name){
+        $NameError = "<p class='text-danger'>Please Enter Your Name</p>";
+    } else {
+        $Name = ValidateFormData($Name);
+    }
+    
+  /*  //Check if whether Emails Exists or not.
+    if(!$Email){
+        $EmailError = "<p class='text-danger'>Please Enter Your Email</p>";
+    } elseif(!filter_var($Email, FILTER_VALIDATE_EMAIL)){
+        $EmailError = "<p class='text-danger'>Please Use Valid Email</p>";
+    } elseif($ResultEmail->num_rows > 0){
+        $EmailError = "<p class='text-danger'>Account With This Email Already Exists. Please Try Another One.</p>";
+    } else {
+        $Email = ValidateFormData($Email);
+    }  */
+    
+    if(!$Phone){
+        $PhoneError = "<p class='text-danger'>Please Enter Your Phone Number</p>";
+    } elseif(preg_match("/^[0-9]{11}$/", $Phone)){
+        $Phone = ValidateFormData($Phone);
+    } else {
+        $PhoneError = "<p class='text-danger'>Please Use Your Valid Phone Number</p>";
+    }
+    
+    if(!$Message){
+        $MessageError = "<p class='text-danger'>Please Enter Your Message</p>";
+    } else {
+        $Message = ValidateFormData($Message);
+    }
+    
+    if(!$Country){
+        $CountryError = "<p class='text-danger'>Please Select Your Country</p>";
+    } else {
+        $Country = ValidateFormData($Country);
+    }
+    
+    //Check if whether Username Exists or not.
+    if(isset($_POST['Username'])){
+        $Username = $_POST['Username'];
+        if($Username){
+        
+            //Get Username From Databse
+            $DBUsername    = ValidateFormData($Username);
+            $QueryUsername  = "SELECT * FROM account WHERE Username = '$DBUsername'";
+            $ResultUsername = $Connection->query($QueryUsername);
+
+            if($ResultUsername->num_rows > 0){
+                $UsernameError = "<p class='text-danger'>Username Already Exists. Please User Another one.</p>";
+            } else {
+                $UsernameFinal = ValidateFormData(strtok($Username, ' '));
+
+                //Insert Data Into Databse
+                if($Name && $UsernameFinal && $Phone && $Message && $Country){
+
+                    $Query = "UPDATE account SET Fullname = '$Name', Username = '$UsernameFinal', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = 'Muhaddisshah@gmail.com'"; // Session Email (Later)
+                        if($Connection->query($Query) === TRUE) {
+                            $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                        } else {
+                        $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                    }
+                }
+            }
+            //If There's No Username Insert All Other Data to Databse
+        } else {
+            //Insert Data Into Databse
+            if($Name && $Phone && $Message && $Country){
+
+                $Query = "UPDATE account SET Fullname = '$Name', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = 'Muhaddisshah@gmail.com'"; // Session Email (Later)
+                if($Connection->query($Query) === TRUE) {
+                    $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                } else {
+                    $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                }
+            }
+        }
+    }
+}
+
+
+
+//Select Account Details of Specific User Session Email or ID (Later)
+function DisplayAccountDetails(){
+    global $Connection;
+    global $Name;
+    global $Email;
+    global $Username;
+    global $Phone;
+    global $Message;
+    global $Country;
+    
+    $Query  = "SELECT * FROM account WHERE Email = 'Muhaddisshah@gmail.com'";
+    $Result = $Connection->query($Query);
+    
+    if($Result->num_rows > 0){
+        while($Row = $Result->fetch_assoc()){
+            $Name     = $Row['Fullname'];
+            $Email    = $Row['Email'];
+            $Username = $Row['Username'];
+            $Phone    = $Row['Phone'];
+            $Message  = $Row['Message'];
+            $Country  = $Row['Country'];
+        }
+    }
+}
 
 
 

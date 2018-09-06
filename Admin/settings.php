@@ -22,7 +22,7 @@
                 <!-- /.col-lg-12 -->
                 
             </div>
-                    <?php echo (isset($SettingsMsg)) ? $SettingsMsg : ""; ?>
+            <?php echo (isset($SettingsMsg)) ? $SettingsMsg : ""; ?>
             <div class="row">
                 <div class="col-md-6">
                     <div class="white-box">

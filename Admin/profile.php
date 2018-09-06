@@ -1,10 +1,12 @@
 <?php 
     define("TITLE", "Profile");
     include("Includes/Header.php");
-
+    include("Includes/Functions_Admin.php");
+    DisplayAccountDetails();
 ?>
 
     <link href="plugins/bower_components/bootstrap-form-helper/dist/css/bootstrap-formhelpers.min.css">
+    <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="plugins/bower_components/bootstrap-form-helper/dist/js/bootstrap-formhelpers.min.js"></script>
 
     <!-- ============================================================== -->
@@ -24,20 +26,21 @@
             </div>
             <!-- /.row -->
             <!-- .row -->
+            <?php echo (isset($ProfileMsg)) ? $ProfileMsg : ""; ?>
             <div class="row">
                 <div class="col-md-4 col-xs-12">
                     <div class="white-box">
                         <div class="user-bg"> <img width="100%" height="100%" alt="user" src="plugins/images/large/img1.jpg">
                             <div class="overlay-box">
                                 <div class="user-content">
-                                    <a href="javascript:void(0)"><img src="plugins/images/users/genu.jpg" class="thumb-lg img-circle" alt="Username"></a>
-                                    <h4 class="text-white">User Name</h4>
-                                    <h5 class="text-white">info@myadmin.com</h5> </div>
+                                    <a href=""><img src="<?php echo GravatarImage($Email); ?>" class="thumb-lg img-circle" alt="Username"></a>
+                                    <h4 class="text-white"><?php echo (isset($Username)) ? $Username : ""; ?></h4>
+                                    <h5 class="text-white"><?php echo (isset($Email)) ? $Email : ""; ?></h5> </div>
                             </div>
                         </div>
                         <div class="user-btm-box">
                             <div class="col-md-4 col-sm-4 text-center">
-                                <h1>03346016010</h1>
+                                <h1><?php echo (isset($Phone)) ? $Phone : ""; ?></h1>
                             </div>
                         </div>
                     </div>
@@ -45,45 +48,52 @@
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
                         <h3 class="box-title">Profile</h3>
-                        <form class="form-horizontal form-material">
+                        <form method="post" action="" class="form-horizontal form-material">
                             <div class="form-group">
+                                <?php echo (isset($NameError)) ? $NameError : ""; ?>
                                 <label class="col-md-12">Full Name</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line"> </div>
+                                    <input name="Fullname" type="text" placeholder="Johnathan Doe" class="form-control form-control-line" value="<?php echo (isset($Name)) ? $Name : ""; ?>"> 
+                                </div>
                             </div>
                             <div class="form-group">
+                                <?php echo (isset($EmailError)) ? $EmailError : ""; ?>
                                 <label class="col-md-12">Email</label>
                                 <div class="col-md-12">
-                                    <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line">
+                                    <input name="Email" type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" value="<?php echo (isset($Email)) ? $Email : ""; ?>" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
+                                <?php echo (isset($UsernameError)) ? $UsernameError : ""; ?>
                                 <label for="" class="col-md-12">Username</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="Drakemesk" class="form-control form-control-line">
+                                    <input name="Username" type="text" class="form-control form-control-line" placeholder="<?php echo (isset($Username)) ? $Username : "Drakemesk"; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
+                                <?php echo (isset($PhoneError)) ? $PhoneError : ""; ?>
                                 <label class="col-md-12">Phone No</label>
                                 <div class="col-md-12">
-                                    <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
+                                    <input name="Phone" type="text" placeholder="123 456 7890" class="form-control form-control-line" value="<?php echo (isset($Phone)) ? $Phone : ""; ?>">
                                 </div>
                             </div>
                             <div class="form-group">
+                                <?php echo (isset($MessageError)) ? $MessageError : ""; ?>
                                 <label class="col-md-12">Message</label>
                                 <div class="col-md-12">
-                                    <textarea rows="5" class="form-control form-control-line"></textarea>
+                                    <textarea name="Message" rows="5" class="form-control form-control-line"><?php echo (isset($Message)) ? $Message : ""; ?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
+                                <?php echo (isset($CountryError)) ? $CountryError : ""; ?>
                                 <label class="col-sm-12">Select Country</label>
                                 <div class="col-sm-12">
-                                    <select class="form-control form-control-line bfh-countries" data-country="US"></select>
+                                    <select name="Country" class="form-control form-control-line bfh-countries" data-country="<?php echo (isset($Country)) ? $Country : ""; ?>"></select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success waves-effect">Update Profile</button>
+                                    <button type="submit" name="UpdateUserProfile" class="btn btn-success waves-effect">Update Profile</button>
                                 </div>
                             </div>
                         </form>
@@ -93,12 +103,12 @@
                 <div class="col-md-8 col-xs-12">
                     <div class="white-box">
                         <h3 class="box-title">Change Password</h3>
-                        <form class="form-horizontal form-material">
+                        <form method="post" action="" class="form-horizontal form-material">
 
                             <div class="form-group">
                                 <label class="col-md-12">Current Password</label>
                                 <div class="col-md-12">
-                                    <input id="CPass" type="password" class="form-control-line">
+                                    <input name="CPass" id="CPass" type="password" class="form-control-line">
                                     <span toggle="#CPass" class="fa fa-fw fa-eye field-icon CPass"></span>
                                 </div>
                             </div>
@@ -106,7 +116,7 @@
                             <div class="form-group">
                                 <label class="col-md-12">New Password</label>
                                 <div class="col-md-12">
-                                    <input id="NPass" type="password" class="form-control-line">
+                                    <input name="NPass" id="NPass" type="password" class="form-control-line">
                                     <span toggle="#NPass" class="fa fa-fw fa-eye field-icon NPass"></span>
                                 </div>
                             </div>
@@ -114,14 +124,14 @@
                             <div class="form-group">
                                 <label class="col-md-12">Confirm New Password</label>
                                 <div class="col-md-12">
-                                    <input id="CNPass" type="password" class="form-control-line">
+                                    <input name="CNPass" id="CNPass" type="password" class="form-control-line">
                                     <span toggle="#CNPass" class="fa fa-fw fa-eye field-icon CNPass"></span>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success waves-effect">Update Password</button>
+                                    <button type="submit" name="UpdatePassword" class="btn btn-success waves-effect">Update Password</button>
                                 </div>
                             </div>
                         </form>
@@ -143,3 +153,17 @@
     include("Includes/Footer.php");
 
 ?>
+<script>
+//Feedback Notification
+$(document).ready(function() {
+    
+    setTimeout(function() {
+     $('.alert').addClass("bounceOutUp");
+    }, 3000)
+    
+    setTimeout(function() {
+     $('.alert').remove();
+    }, 4000)
+    
+});
+</script>
