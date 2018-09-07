@@ -4,6 +4,8 @@ include("../Includes/Connection.php");
 
 #Functions_Admin.php For Functioning and Linking or Interacting Admin Panel / Backend Contents with Databse Including Crud Operations
 
+date_default_timezone_set("Asia/Karachi");
+
 
 //Form Validation / XSS / SQLi
 function ValidateFormData($FormData){
@@ -36,7 +38,7 @@ if(isset($_POST['Submit'])){
         if($Connection->query($Query) === TRUE){
             $TagsMessage = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert"><strong>' . $Tag . '</strong> Added Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         } else {
-            $TagsMessage = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            $TagsMessage = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         }
     } 
 }
@@ -69,7 +71,7 @@ function RemoveTags($Delete){
         global $TagsMessage;
         $TagsMessage = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Tag Removed Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
     } else {
-        $TagsMessage = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        $TagsMessage = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
     }
 }
 
@@ -126,7 +128,7 @@ if (isset($_POST['UpdateProfile'])) {
         if($Connection->query($Query) === TRUE){
             $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Homepage Updated Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         } else {
-            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         }
     }
 }
@@ -146,7 +148,7 @@ if(isset($_POST['UpdateDescription'])){
         if($Connection->query($Query) === TRUE){
             $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Description Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         } else {
-            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         }
     } 
 }
@@ -176,7 +178,7 @@ if(isset($_POST['UpdateFooter'])){
         if($Connection->query($Query) === TRUE){
             $SettingsMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Footer Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         } else {
-            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            $SettingsMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
         }
        
     }
@@ -304,7 +306,7 @@ if(isset($_POST['UpdateUserProfile'])){
                         if($Connection->query($Query) === TRUE) {
                             $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                         } else {
-                        $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                        $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                     }
                 }
             }
@@ -317,7 +319,7 @@ if(isset($_POST['UpdateUserProfile'])){
                 if($Connection->query($Query) === TRUE) {
                     $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                 } else {
-                    $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                    $ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                 }
             }
         }
@@ -370,7 +372,7 @@ if (isset($_POST['UpdatePassword'])) {
 				if ($Connection->query($Query) === TRUE) {
 					$ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Password Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
 				} else {
-					$ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error'.$Connection-> error.
+					$ProfileMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: '.$Connection-> error.
 					'<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
 				}
 			} else {
@@ -410,7 +412,6 @@ function DisplayUsers(){
 }
 
 
-
 //Select Account Details of Specific User Session Email or ID (Later)
 function DisplayAccountDetails(){
     global $Connection;
@@ -436,6 +437,85 @@ function DisplayAccountDetails(){
     }
 }
 
+
+//Select Tags from Databse /Admin/Post
+function DisplayTagOption(){
+    global $Connection;
+    
+    $Query  = "SELECT * FROM tags";
+    $Result = $Connection->query($Query);  
+
+        if($Result->num_rows > 0){
+            while($Row = $Result->fetch_assoc()){
+            echo "<option value='" . $Row['Tag_ID'] . "'>" . $Row['Tag'] . "</option>";
+        }
+    }
+}
+
+
+//Add New Post in Databse /Admin/Post
+if(isset($_POST['AddPost'])){
+    
+    $PostTitle   = $_POST['PostTitle'];
+    $PostContent = $_POST['PostContent'];
+    $PostTag     = $_POST['Tag'];
+    
+    //Getting Feature Image
+	$File      = $_FILES['FeatureImage'];
+	$FileName  = $File['name'];
+	$FileTmp   = $File['tmp_name'];
+	$FileType  = $File['type'];
+	$FileSize  = $File['size'];
+	$FileError = $File['error'];
+	$FileExt   = pathinfo($FileName, PATHINFO_EXTENSION);
+    
+    if(!$PostTitle){
+        $PostTitleError = "<p class='text-danger'>Please Add Post Title</p>";
+    } else {
+        $PostTitle = ValidateFormData($PostTitle);
+    }
+    
+    if(!$PostContent){
+        $PostContentError = "<p class='text-danger'>Please Add Post Content</p>";
+    }
+    
+    if(!$PostTag){
+        $PostTagError = "<p class='text-danger'>Please Select Post Category</p>";
+    } else {
+        $PostTag = ValidateFormData($PostTag);
+    }
+    
+    if(empty($FileName)){
+        $ImageError = "<p class='text-danger'>Please Select Image to Upload</p>";
+    }
+    
+    if($PostTitle && $FileName && $PostContent && $PostTag){
+        if ($FileExt == 'png' || $FileExt == 'jpg' || $FileExt == 'bmp' || $FileExt == 'tiff'){
+            if ($FileSize <= 5242880){
+				$FileNewName = uniqid(uniqid()) . '.' . $FileExt;
+				$Dstn = "plugins/images/BlogImages/" . $FileNewName;
+				if (move_uploaded_file($FileTmp, $Dstn)){
+                    $Date = date("F j, Y");
+                    
+                    // Insert Image Path to Databse. Change Posted_By to User ID By Session(Later)
+                    $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
+                    
+                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '1', '$Date')";
+                                        
+                    if($Connection->query($Query) === TRUE) {
+                         $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">New Post Added Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                    } else {
+                        $PostMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                    }
+                }
+            } else {
+                $ImageError = "<p class='text-danger'>Your file size must be less than 5MB</p>";
+            }
+        } else {
+            $ImageError = "<p class='text-danger'>Only .bmp, .jpg, .png and .tiff Extensions are allowed.</p>";
+        }
+    }     
+}
 
 
 

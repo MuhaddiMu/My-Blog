@@ -1,6 +1,7 @@
 <?php 
     define("TITLE", "Posts");
     include("Includes/Header.php");
+    include("Includes/Functions_Admin.php");
 
 ?>
 
@@ -23,41 +24,43 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            <?php echo (isset($PostMsg)) ? $PostMsg : ""; ?>
             <div class="row">
                 <div class="col-md-12">
                     <div class="white-box">
                         <h3 class="box-title"><i class="fa fa-plus"></i> Create New Post</h3>
-                        <form method="post" action="">
+                        <form method="post" action="" enctype="multipart/form-data">
                             <div class="form-group">
-                                <input type="text" class="form-control rounded" placeholder="Post Title">
+                                <?php echo (isset($PostTitleError)) ? $PostTitleError : ""; ?>
+                                <input name="PostTitle" type="text" class="form-control rounded" placeholder="Post Title" required>
                             </div>
 
                             <div class="form-group">
-                                <textarea class="form-group form-control rounded" id="Editor"></textarea>
+                                <?php echo (isset($PostContentError)) ? $PostContentError : ""; ?>
+                                <textarea name="PostContent" class="form-group form-control rounded" id="Editor"></textarea>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <?php echo (isset($ImageError)) ? $ImageError : ""; ?>
                                     <label for="Feature Image">Feature Image:</label>
-                                    <input title="Feature Image" id="Feature Image" type="file" class="form-control" required>
+                                    <input name="FeatureImage" title="Feature Image" id="Feature Image" type="file" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <?php echo (isset($PostTagError)) ? $PostTagError : ""; ?>
                                     <label for="Post Tag">Select Category:</label>
-                                    <select required class="form-control" id="Post Tag">
-                                        <option selected disabled>Select Tag</option>
-                                        <option>Tag 1</option>
-                                        <option>Tag 2</option>
-                                        <option>Tag 3</option>
-                                        <option>Tag 4</option>
+                                    <select name="Tag" class="form-control" id="Post Tag" required>
+                                        <option value="" selected>Select Tag</option>
+                                        <?php DisplayTagOption(); ?>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="input-md btn btn-success waves-effect">Add Post</button>
+                                <button name="AddPost" type="submit" class="input-md btn btn-success waves-effect">Add Post</button>
                             </div>
 
                         </form>
@@ -115,3 +118,17 @@
     include("Includes/Footer.php");
 
 ?>
+<script>
+//Feedback Notification
+$(document).ready(function() {
+    
+    setTimeout(function() {
+     $('.alert').addClass("bounceOutUp");
+    }, 3000)
+    
+    setTimeout(function() {
+     $('.alert').remove();
+    }, 4000)
+    
+});    
+</script>
