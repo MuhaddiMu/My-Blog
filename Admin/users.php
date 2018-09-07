@@ -1,6 +1,7 @@
 <?php 
     define("TITLE", "Users");
     include("Includes/Header.php");
+    include("Includes/Functions_Admin.php");
 
 ?>
     <!-- ============================================================== -->
@@ -23,7 +24,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="white-box">
-                        <h3 class="box-title">Basic Table</h3>
+                        <h3 class="box-title">Users</h3>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
@@ -36,48 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="UsrImg">
-                                    <tr>
-                                        <td>1</td>
-                                        <td><img src="plugins/images/users/varun.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Prohaska</td>
-                                        <td>@Genelia</td>
-                                        <td>admin</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><img src="plugins/images/users/genu.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Gaylord</td>
-                                        <td>@Ritesh</td>
-                                        <td>member</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td><img src="plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Gusikowski</td>
-                                        <td>@Govinda</td>
-                                        <td>developer</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td><img src="plugins/images/users/ritesh.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Rogahn</td>
-                                        <td>@Hritik</td>
-                                        <td>supporter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td><img src="plugins/images/users/arijit.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Hickle</td>
-                                        <td>@Maruti</td>
-                                        <td>member</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td><img src="plugins/images/users/govinda.jpg" alt="user-img" class="img-circle"></td>
-                                        <td>Eichmann</td>
-                                        <td>@Sonu</td>
-                                        <td>supporter</td>
-                                    </tr>
+                                    <?php DisplayUsers(); ?>
                                 </tbody>
                             </table>
                         </div>

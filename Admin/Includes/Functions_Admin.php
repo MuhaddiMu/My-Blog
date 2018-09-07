@@ -383,6 +383,34 @@ if (isset($_POST['UpdatePassword'])) {
 }
 
 
+//User Detail and their Roles (User Management) /Admin/Users
+function DisplayUsers(){
+    global $Connection;
+    
+    $Query = "SELECT * FROM account";
+    $Result = $Connection->query($Query);
+    
+     if($Result->num_rows > 0){
+         $Number = 0;
+        while($Row = $Result->fetch_assoc()){
+            $Name     = $Row['Fullname'];
+            $Email    = $Row['Email'];
+            $Username = $Row['Username'];
+            $Role     = $Row['Role'];
+            
+            echo " <tr>
+                        <td>" . ++$Number . "</td>
+                        <td><img src='" . GravatarImage($Email) . "' alt='$Name' class='img-circle'></td>
+                        <td>$Name</td>
+                        <td>@$Username</td>
+                        <td>$Role</td>
+                   </tr>";
+        }
+    }
+}
+
+
+
 //Select Account Details of Specific User Session Email or ID (Later)
 function DisplayAccountDetails(){
     global $Connection;
