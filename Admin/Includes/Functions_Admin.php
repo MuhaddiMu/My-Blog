@@ -236,7 +236,6 @@ if(isset($_POST['UpdateUserProfile'])){
     
     $Name       = $_POST['Fullname'];
     //$Email      = $_POST['Email'];
-    //$Username   = $_POST['Username'];
     $Phone      = $_POST['Phone'];
     $Message    = $_POST['Message'];
     $Country    = $_POST['Country'];  
@@ -514,10 +513,95 @@ if(isset($_POST['AddPost'])){
         } else {
             $ImageError = "<p class='text-danger'>Only .bmp, .jpg, .png and .tiff Extensions are allowed.</p>";
         }
-    }     
+    }
 }
 
 
+//Update Post in Databse /Admin/Edit
+function EditPost(){
+    global $Connection;
+    global $PostTag;
+    global $PostTitle;
+    global $PostContent;
+    global $PostMsg;
+    global $PostTitleError;
+    global $PostContentError;
+    global $PostTagError;
+    
+    
+    if(isset($_GET['Edit'])){
+        $EditPostID = $_GET['Edit'];
+    
+        //Check if there's in Post with Parameter ID 
+        $Query  = "SELECT * FROM blog_post WHERE Post_ID = '$EditPostID'";
+        $Result = $Connection->query($Query);
+        
+        if($Result->num_rows > 0){
+            //Update Post With Selected ID
+            while($Row = $Result->fetch_assoc()){
+                
+                $PostTag     = $Row['Post_Tag'];
+                $PostTitle   = $Row['Post_Title'];
+                $PostContent = $Row['Post_Content']; 
+                
+                //Select Post_Tag Name From Databse 
+                function DisplayPostTag(){
+                    global $Connection;
+                    global $PostTag;
+
+                    $Query  = "SELECT * FROM tags WHERE Tag_ID = '$PostTag'";
+                    $Result = $Connection->query($Query);
+
+                    if($Result->num_rows > 0){
+                        while($Row = $Result->fetch_assoc()){
+                            echo "<option selected value='" . $Row['Tag_ID'] . "'>" . $Row['Tag'] . "</option>";
+                        }
+                    }
+                }
+                
+                //Update The Post
+                
+                if(isset($_POST['UpdatePost'])){
+                    $PostTitle   = $_POST['PostTitle'];
+                    $PostContent = $_POST['PostContent'];
+                    $PostTag     = $_POST['Tag'];
+                    
+                    if(!$PostTitle){
+                        $PostTitleError = "<p class='text-danger'>Please Add Post Title</p>";
+                    } else {
+                        $PostTitle = ValidateFormData($PostTitle);
+                    }
+
+                    if(!$PostContent){
+                        $PostContentError = "<p class='text-danger'>Please Add Post Content</p>";
+                    }
+
+                    if(!$PostTag){
+                        $PostTagError = "<p class='text-danger'>Please Select Post Category</p>";
+                    } else {
+                        $PostTag = ValidateFormData($PostTag);
+                    }
+                    
+                    //Update Post Change Posted_By to Session User ID (Later)
+                    if($PostTitle && $PostContent && $PostTag){
+                        $Date = date("F j, Y");
+                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '1', Post_Date = '$Date' WHERE Post_ID = '$EditPostID'";
+                        
+                        if($Connection->query($Query) === TRUE) {
+                            $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Updated Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                        } else {
+                            $PostMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+                        }
+                    }
+                }
+                
+            }
+        } else {
+            echo "<script>window.location = 'post.php'</script>";
+            
+        }
+    }
+}
 
 
 
