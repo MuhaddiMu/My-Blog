@@ -3203,7 +3203,7 @@ ul.common li a:hover {
     line-height: 25px;
     color: #848a96;
     overflow: hidden;
-    max-height: 52px;
+    /* max-height: 52px; */ 
     text-overflow: ellipsis
 }
 

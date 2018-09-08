@@ -22,8 +22,6 @@ function GravatarImage($Email){
     return $Grav_Url;
 }
 
-
-
 //Insert Tags to Databse in /Admin/Tags
 if(isset($_POST['Submit'])){
     $Tag = $_POST['Tag'];
@@ -494,12 +492,11 @@ if(isset($_POST['AddPost'])){
 				$FileNewName = uniqid(uniqid()) . '.' . $FileExt;
 				$Dstn = "plugins/images/BlogImages/" . $FileNewName;
 				if (move_uploaded_file($FileTmp, $Dstn)){
-                    $Date = date("F j, Y");
                     
                     // Insert Image Path to Databse. Change Posted_By to User ID By Session(Later)
                     $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
                     
-                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '1', '$Date')";
+                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '1', CURRENT_TIMESTAMP)";
                                         
                     if($Connection->query($Query) === TRUE) {
                          $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">New Post Added Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
@@ -584,8 +581,8 @@ function EditPost(){
                     
                     //Update Post Change Posted_By to Session User ID (Later)
                     if($PostTitle && $PostContent && $PostTag){
-                        $Date = date("F j, Y");
-                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '1', Post_Date = '$Date' WHERE Post_ID = '$EditPostID'";
+                        
+                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '1', Post_Date = CURRENT_TIMESTAMP WHERE Post_ID = '$EditPostID'";
                         
                         if($Connection->query($Query) === TRUE) {
                             $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Updated Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
@@ -600,14 +597,82 @@ function EditPost(){
             echo "<script>window.location = 'post.php'</script>";
             
         }
+    } else {
+        echo "<script>window.location = 'post.php'</script>";
     }
 }
 
 
+//Display Recent Posts From Database /Admin/Edit
+function DisplayRecentPosts(){
+    global $Connection;
+    global $PostTag;
+    global $PostTitle;
+    global $PostContent;
+    global $PostedBy;
+    global $PostDate;
+    
+    $Query  = "SELECT * FROM blog_post ORDER BY Post_ID DESC";
+    $Result = $Connection->query($Query);
+    
+    if($Result->num_rows > 0){
+        while($Row = $Result->fetch_assoc()){
+            $PostTag     = $Row['Post_Tag'];
+            $PostID      = $Row['Post_ID'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostContent = ValidateFormData($Row['Post_Content']); 
+            $PostedBy    = $Row['Posted_By']; 
+            $PostDate    = $Row['Post_Date']; 
+            
+            $PostDate    = date('h:m A, d F Y', strtotime($PostDate));            
+            $PostContent = substr($PostContent, 0, 350);        
+            
+            echo '<div class="comment-body">
+                    <div class="mail-contnet">
+                        <h5><b>' . $PostTitle . '</b></h5><span class="time"><b>' . $PostDate . '</b> By <b>' . PostedBy($PostedBy) . '</b></span>
+                        <br/><span class="mail-desc">' . $PostContent . '...</span>
+                        <a href="Edit.php?Edit=' . $PostID . '" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="fa fa-edit"></i> Edit This Post</a><a href="?Delete=' . $PostID . '" onclick="return confirm(\'Are you sure?\');" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Post</a>
+                    </div>
+                 </div>';
+        }
+    }   
+}
 
 
+//Select User Who Posted the thread /Admin/Edit
+function PostedBy($PostedBy){
+        global $Connection;
+    
+    $Query  = "SELECT * FROM account WHERE ID = '$PostedBy'";
+    $Result = $Connection->query($Query);
+    if($Result->num_rows > 0){
+        while($Row = $Result->fetch_assoc()){
+            return $Row['Username'];
+        }
+    }
+}
 
 
+//Delete Post /Admin/Post
+if(isset($_GET['Delete'])){
+    $DeletePost = $_GET['Delete'];
+    
+    //Check if Post Exist or not
+    $Query  = "SELECT * FROM blog_post WHERE Post_ID = '$DeletePost'";
+    $Result = $Connection->query($Query);
+        
+    if($Result->num_rows > 0){
+    
+        $Query = "DELETE FROM blog_post WHERE Post_ID = '$DeletePost'";
+        if($Connection->query($Query) === TRUE) {
+            $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Deleted Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        } else {
+            $PostMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        }
+    } else {
+        echo "<script>window.location = 'post.php'</script>";
+    }
+}
 
 
 

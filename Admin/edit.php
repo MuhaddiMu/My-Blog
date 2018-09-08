@@ -1,5 +1,5 @@
 <?php 
-    define("TITLE", "Posts");
+    define("TITLE", "Edit Post");
     include("Includes/Header.php");
     include("Includes/Functions_Admin.php");
 
@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button name="UpdatePost" type="submit" class="input-md btn btn-success waves-effect">Add Post</button>
+                                <button name="UpdatePost" type="submit" class="input-md btn btn-success waves-effect">Update Post</button>
                             </div>
 
                         </form>
@@ -73,38 +73,7 @@
                         </script>
 
                     </div>
-
-                    <div class="white-box">
-                        <h3 class="box-title"><i class="fa fa-file-text"></i> Recent Posts</h3>
-
-                        <div class="comment-center p-t-10">
-                            <div class="comment-body">
-                                <div class="mail-contnet">
-                                    <h5><b>Post Title</b></h5><span class="time">10:20 AM   20  may 2016</span>
-                                    <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="fa fa-edit"></i> Edit This Post</a><a href="" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Post</a>
-                                </div>
-                            </div>
-
-                            <div class="comment-body">
-                                <div class="mail-contnet">
-                                    <h5><b>Post Title</b></h5><span class="time">10:20 AM   20  may 2016</span>
-                                    <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="fa fa-edit"></i> Edit This Post</a><a href="" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Post</a>
-                                </div>
-                            </div>
-
-                            <div class="comment-body">
-                                <div class="mail-contnet">
-                                    <h5><b>Post Title</b></h5><span class="time">10:20 AM   20  may 2016</span>
-                                    <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="fa fa-edit"></i> Edit This Post</a><a href="" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Post</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+                    
                 </div>
             </div>
         </div>
