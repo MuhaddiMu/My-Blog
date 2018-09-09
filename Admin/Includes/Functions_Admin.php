@@ -754,6 +754,62 @@ function DeleteComment(){
 }
 
 
+//Display Recent Posts From Database /Admin/Index
+function DisplayRecentPostsIndex(){
+    global $Connection;
+    global $PostTag;
+    global $PostTitle;
+    global $PostContent;
+    global $PostedBy;
+    global $PostDate;
+    
+    $Query  = "SELECT * FROM blog_post ORDER BY Post_ID DESC";
+    $Result = $Connection->query($Query);
+    
+    if($Result->num_rows > 0){
+        $Number = 0;
+        while($Row = $Result->fetch_assoc()){
+            $PostTag     = $Row['Post_Tag'];
+            $PostID      = $Row['Post_ID'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostDate    = $Row['Post_Date']; 
+            
+            $PostDate    = date('M d, Y', strtotime($PostDate));            
+            $PostTitle   = substr($PostTitle, 0, 35);
+            
+            if(strlen($PostTitle) > 30){
+                $PostTitle = $PostTitle . "...";
+            }
+            
+            //Display Post Update Visits (Later)
+            echo '<tr>
+                    <td>' . ++$Number . '</td>
+                    <td class="txt-oflo">' . $PostTitle  . '</td>
+                    <td>' . DisplayTagIndex($PostTag) . '</td>
+                    <td class="txt-oflo">' . $PostDate . '</td>
+                    <td class="txt-oflo">1337</td>
+                  </tr>';
+        }
+    }   
+}
+
+
+//Display Post Tag
+function DisplayTagIndex($PostTag){
+    global $Connection;
+    global $PostTag;
+    
+    $Query  = "SELECT * FROM tags WHERE Tag_ID = '$PostTag'";
+    $Result = $Connection->query($Query);  
+
+    if($Result->num_rows > 0){
+        while($Row = $Result->fetch_assoc()){
+            $PostTag = $Row['Tag'];
+            return $PostTag;
+        }
+    }
+}
+
 
 //Close Connection
 $Connection->error;
