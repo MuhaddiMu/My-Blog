@@ -755,5 +755,7 @@ function DeleteComment(){
 
 
 
+//Close Connection
+$Connection->error;
 
 ?>
