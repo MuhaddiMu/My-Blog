@@ -3,6 +3,9 @@
     include("Includes/Header.php");
     include("Includes/Functions_Admin.php");
 
+    if(isset($_GET['Delete'])){
+        DeletePost();
+    }
 ?>
 
     <!-- CK Editor -->

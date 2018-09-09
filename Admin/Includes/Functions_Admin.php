@@ -630,7 +630,7 @@ function DisplayRecentPosts(){
             echo '<div class="comment-body">
                     <div class="mail-contnet">
                         <h5><b>' . $PostTitle . '</b></h5><span class="time"><b>' . $PostDate . '</b> By <b>' . PostedBy($PostedBy) . '</b></span>
-                        <br/><span class="mail-desc">' . $PostContent . '...</span>
+                        <span class="mail-desc">' . $PostContent . '...</span>
                         <a href="Edit.php?Edit=' . $PostID . '" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="fa fa-edit"></i> Edit This Post</a><a href="?Delete=' . $PostID . '" onclick="return confirm(\'Are you sure?\');" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Post</a>
                     </div>
                  </div>';
@@ -654,7 +654,10 @@ function PostedBy($PostedBy){
 
 
 //Delete Post /Admin/Post
-if(isset($_GET['Delete'])){
+function DeletePost(){
+    global $Connection;
+    global $PostMsg;
+    
     $DeletePost = $_GET['Delete'];
     
     //Check if Post Exist or not
@@ -671,6 +674,82 @@ if(isset($_GET['Delete'])){
         }
     } else {
         echo "<script>window.location = 'post.php'</script>";
+    }
+}
+
+
+//Select Comments /Admin/Comments
+function DisplayComments(){
+    global $Connection;
+    global $CommentPost;
+    global $CommentAuthor;
+    global $Comment;
+    global $CommentDate;
+    
+    $Query  = "SELECT * FROM comments ORDER BY Comment_ID DESC";
+    $Result = $Connection->query($Query);
+    
+    if($Result->num_rows > 0){
+        while($Row = $Result->fetch_assoc()){
+            
+            $CommentID      = $Row['Comment_ID'];
+            $CommentPost    = $Row['CommentPost_ID'];
+            $CommentAuthor  = $Row['Comment_Author'];
+            $Comment        = $Row['Comment'];
+            $CommentDate    = $Row['Comment_Date'];
+            
+            $CommentDate    = date('h:m A, d F Y', strtotime($CommentDate));        
+            
+            //Display Comments
+            echo '<div class="comment-body">
+                    <div class="mail-contnet">
+                        <h5><b>' . PostTitle($CommentPost) . '</b> By <b>' . $CommentAuthor . '</b></h5>
+                        <span class="time">' . $CommentDate . '</span>
+                        <span class="mail-desc">' . $Comment . '</span>
+                        <a href="?Delete=' . $CommentID . '" onclick="return confirm(\'Are you sure?\');" class="btn-rounded btn btn-danger btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
+                    </div>
+                  </div>';
+            
+        }
+    }
+}
+
+
+//Select Post of The Comment /Admin/Comments
+function PostTitle(){
+    global $Connection;
+    global $CommentPost;
+    
+    $Query = "SELECT * FROM blog_post WHERE Post_ID = '$CommentPost'";
+    $Result = $Connection->query($Query);
+        if($Result->num_rows > 0){
+            while($Row = $Result->fetch_assoc()){
+                $CommentPost = $Row['Post_Title'];
+                return $CommentPost;
+        }
+    }
+}
+
+
+//Delete Comment /Admin/Comments
+function DeleteComment(){
+    global $Connection;
+    global $CommentMsg;
+    
+    $DeleteComment = $_GET['Delete'];
+    
+    //Check if Post Exist or not
+    $Query  = "SELECT * FROM comments WHERE Comment_ID = '$DeleteComment'";
+    $Result = $Connection->query($Query);
+        
+    if($Result->num_rows > 0){
+    
+        $Query = "DELETE FROM comments WHERE Comment_ID = '$DeleteComment'";
+        if($Connection->query($Query) === TRUE) {
+            $CommentMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Comment Deleted Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        } else {
+            $CommentMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+        }
     }
 }
 

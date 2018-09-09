@@ -1,6 +1,10 @@
 <?php 
     include("Includes/Header.php");
+    include("Includes/Functions_Admin.php");
 
+    if(isset($_GET['Delete'])){
+        DeleteComment();
+    }
 ?>
 
     <!-- ============================================================== -->
@@ -23,6 +27,7 @@
             <!-- Different data widgets -->
             <!-- ============================================================== -->
             <!-- .row -->
+            <?php echo (isset($CommentMsg)) ? $CommentMsg : ""; ?>
             <div class="row">
                 <div class="col-lg-4 col-sm-6 col-xs-12">
                     <div class="white-box analytics-info">
@@ -158,36 +163,7 @@
                     <div class="white-box">
                         <h3 class="box-title">Recent Comments</h3>
                         <div class="comment-center p-t-10">
-                            <div class="comment-body">
-                                <div class="mail-contnet">
-                                    <h5><b>Pavan kumar</b></h5><span class="time"><b>Title Of My Post</b></span>
-                                    <br>
-                                    <span class="time">10:20 AM   20  may 2016</span>
-                                    <br/>
-                                    <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
-                                </div>
-                            </div>
-                            <div class="comment-body">
-                                <div class="mail-contnet">
-                                    <h5><b>Sonu Nigam</b></h5><span class="time"><b>Title Of My Post</b></span>
-                                    <br>
-                                    <span class="time">10:20 AM   20  may 2016</span>
-                                    <br/>
-                                    <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
-                                </div>
-                            </div>
-                            <div class="comment-body b-none">
-                                <div class="mail-contnet">
-                                    <h5><b>Arijit singh</b></h5><span class="time"><b>Title Of My Post</b></span>
-                                    <br>
-                                    <span class="time">10:20 AM   20  may 2016</span>
-                                    <br/>
-                                    <span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                                    <a href="" class="btn-rounded btn btn-danger  btn-outline"><i class="fa fa-trash"></i> Delete This Comment</a>
-                                </div>
-                            </div>
+                            <?php DisplayComments(); ?>
                         </div>
                     </div>
                 </div>
