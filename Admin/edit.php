@@ -1,7 +1,6 @@
 <?php 
     define("TITLE", "Edit Post");
     include("Includes/Header.php");
-    include("Includes/Functions_Admin.php");
 
     EditPost();
 

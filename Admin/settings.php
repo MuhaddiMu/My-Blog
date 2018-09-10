@@ -1,7 +1,6 @@
 <?php 
     define("TITLE", "Settings");
     include("Includes/Header.php");
-    include("Includes/Functions_Admin.php");
     DisplayHomepageSettings();
 
 ?>

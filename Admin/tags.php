@@ -1,7 +1,6 @@
 <?php 
     define("TITLE", "Tags");
     include("Includes/Header.php");
-    include("Includes/Functions_Admin.php");
 
 if(isset($_GET['Delete'])){
     $Delete = ValidateFormData($_GET['Delete']);

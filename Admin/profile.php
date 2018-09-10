@@ -1,7 +1,6 @@
 <?php 
     define("TITLE", "Profile");
     include("Includes/Header.php");
-    include("Includes/Functions_Admin.php");
     DisplayAccountDetails();
 ?>
 

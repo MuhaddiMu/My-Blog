@@ -668,13 +668,18 @@ function DeletePost(){
     
         $Query = "DELETE FROM blog_post WHERE Post_ID = '$DeletePost'";
         if($Connection->query($Query) === TRUE) {
+            
             $Query = "DELETE FROM comments WHERE CommentPost_ID = '$DeletePost'";
             if($Connection->query($Query) === TRUE) {
+                
                 $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Deleted Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
             } else {
                 $PostMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
             }
-        }
+            
+        } else {
+                $PostMsg = '<div class="animated bounceInDown alert alert-warning alert-dismissible show" role="alert"> Error: ' . $Connection->error . '<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
+            }
     } else {
         echo "<script>window.location = 'post.php'</script>";
     }
