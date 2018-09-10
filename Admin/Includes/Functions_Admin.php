@@ -13,7 +13,8 @@ function LogInUser(){
     global $EmailError;
     global $PasswordError;
     global $SessionEmail;
-    global $SessionName;
+    global $SessionEmail;
+    global $SessionID;
     global $LoginError;
 
     if(isset($_POST['Login'])){
@@ -38,6 +39,7 @@ function LogInUser(){
             if($Result->num_rows > 0){
                 while($Row = $Result->fetch_assoc()){
                     $SessionEmail  = $Row['Email'];
+                    $SessionID     = $Row['ID'];
                     $SessionName   = $Row['Username'];
                     $HashPassword  = $Row['Password'];
                     
@@ -46,6 +48,7 @@ function LogInUser(){
                         session_start();
                         $_SESSION['LoggedInEmail'] = $SessionEmail;
                         $_SESSION['LoggedInName']  = $SessionName;
+                        $_SESSION['LoggedInID']    = $SessionID;
                         header("Location: index.php");
                     } else {
                         $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
@@ -545,10 +548,10 @@ if(isset($_POST['AddPost'])){
 				$Dstn = "plugins/images/BlogImages/" . $FileNewName;
 				if (move_uploaded_file($FileTmp, $Dstn)){
                     
-                    // Insert Image Path to Databse. Change Posted_By to User ID By Session(Later)
+                    // Insert Image Path to Databse.
                     $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
                     
-                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '1', CURRENT_TIMESTAMP)";
+                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '" . $_SESSION['LoggedInID'] . "', CURRENT_TIMESTAMP)";
                                         
                     if($Connection->query($Query) === TRUE) {
                          $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">New Post Added Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
@@ -631,10 +634,9 @@ function EditPost(){
                         $PostTag = ValidateFormData($PostTag);
                     }
                     
-                    //Update Post Change Posted_By to Session User ID (Later)
                     if($PostTitle && $PostContent && $PostTag){
                         
-                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '1', Post_Date = CURRENT_TIMESTAMP WHERE Post_ID = '$EditPostID'";
+                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '" . $_SESSION['LoggedInID'] . "', Post_Date = CURRENT_TIMESTAMP WHERE Post_ID = '$EditPostID'";
                         
                         if($Connection->query($Query) === TRUE) {
                             $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Updated Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
@@ -823,7 +825,7 @@ function DisplayRecentPostsIndex(){
     global $PostedBy;
     global $PostDate;
     
-    $Query  = "SELECT * FROM blog_post ORDER BY Post_ID DESC";
+    $Query  = "SELECT * FROM blog_post";
     $Result = $Connection->query($Query);
     
     if($Result->num_rows > 0){
