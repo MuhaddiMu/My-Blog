@@ -51,18 +51,21 @@ function LogInUser(){
                     if(password_verify($Password, $HashPassword)){
                         session_start();
                         
-                        $_SESSION['LoggedInEmail'] = $SessionEmail;
-                        $_SESSION['LoggedInName']  = $SessionName;
-                        $_SESSION['LoggedInID']    = $SessionID;
-                        
                         //Remember Me Functionality
                         if(isset($RememberMe)){
+                            
                             if($RememberMe == "On"){
                                 $_SESSION['RememberMe'] = $SessionID;
                                 setcookie('RememberMeLogIn', $_SESSION['LoggedInEmail'], time() + (7 * 24 * 60 * 60));
+                                $_SESSION['LoggedInEmail'] = $SessionEmail;
+                                $_SESSION['LoggedInName']  = $SessionName;
+                                $_SESSION['LoggedInID']    = $SessionID;
                             }
                         } else {
                             setcookie('LoggedIn', $_SESSION['LoggedInEmail'], time() + (24 * 60 * 60));
+                            $_SESSION['LoggedInEmail'] = $SessionEmail;
+                            $_SESSION['LoggedInName']  = $SessionName;
+                            $_SESSION['LoggedInID']    = $SessionID;
                         }
                         
                         header("Location: index.php");
