@@ -4,9 +4,7 @@
     include("Includes/Functions_Admin.php");
     
     //Redirect User Back if No LoggedIn Seesion is Set
-    if(!isset($_SESSION['LoggedInEmail'])){
-        header("Location: Login.php");
-    }
+    if(isset($_COOKIE['LoggedIn']) || isset($_COOKIE['RememberMeLogIn'])){} else { header("Location: Login.php"); }
 
 ?>
 
@@ -18,6 +16,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="refresh" content="30"/>
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="plugins/images/favicon.png">

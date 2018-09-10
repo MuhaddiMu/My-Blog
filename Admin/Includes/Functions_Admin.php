@@ -31,6 +31,10 @@ function LogInUser(){
             $PasswordError = "<p class='text-danger'>Please Enter Your Password</p>";
         }
         
+        if(!empty($_POST['RememberMe'])){
+            $RememberMe = $_POST['RememberMe'];
+        }
+        
         if($Email && $Password){
             
             $Query = "SELECT * FROM account WHERE Email = '$Email'";
@@ -46,9 +50,21 @@ function LogInUser(){
                     //Verify Password
                     if(password_verify($Password, $HashPassword)){
                         session_start();
+                        
                         $_SESSION['LoggedInEmail'] = $SessionEmail;
                         $_SESSION['LoggedInName']  = $SessionName;
                         $_SESSION['LoggedInID']    = $SessionID;
+                        
+                        //Remember Me Functionality
+                        if(isset($RememberMe)){
+                            if($RememberMe == "On"){
+                                $_SESSION['RememberMe'] = $SessionID;
+                                setcookie('RememberMeLogIn', $_SESSION['LoggedInEmail'], time() + (7 * 24 * 60 * 60));
+                            }
+                        } else {
+                            setcookie('LoggedIn', $_SESSION['LoggedInEmail'], time() + (24 * 60 * 60));
+                        }
+                        
                         header("Location: index.php");
                     } else {
                         $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
@@ -871,7 +887,6 @@ function DisplayTagIndex($PostTag){
         }
     }
 }
-
 
 //Close Connection
 $Connection->error;

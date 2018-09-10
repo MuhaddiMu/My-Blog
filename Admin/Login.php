@@ -2,7 +2,7 @@
 
     session_start();
     include("Includes/Functions_Admin.php");
-    if(isset($_SESSION['LoggedInEmail'])){
+    if(isset($_COOKIE['LoggedIn']) || isset($_COOKIE['RememberMeLogIn'])){
         header("Location: index.php");
     }
 
@@ -53,7 +53,7 @@
 
 								<div class="form-group">
 									<label>
-										<input type="checkbox" name="RememberMe"> Remember Me
+										<input type="checkbox" value="On" name="RememberMe"> Remember Me for one week
 									</label>
 								</div>
 
