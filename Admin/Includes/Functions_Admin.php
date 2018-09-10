@@ -7,6 +7,58 @@ include("../Includes/Connection.php");
 date_default_timezone_set("Asia/Karachi");
 
 
+//Login User /Admin/Login
+function LogInUser(){
+    global $Connection;
+    global $EmailError;
+    global $PasswordError;
+    global $SessionEmail;
+    global $SessionName;
+    global $LoginError;
+
+    if(isset($_POST['Login'])){
+        $Email    = $_POST['Email'];
+        $Password = $_POST['Password'];
+        
+        if(!$Email){
+            $EmailError = "<p class='text-danger'>Please Enter Your Email</p>";
+        } else {
+            $Email = ValidateFormData($Email);
+        }
+        
+        if(!$Password){
+            $PasswordError = "<p class='text-danger'>Please Enter Your Password</p>";
+        }
+        
+        if($Email && $Password){
+            
+            $Query = "SELECT * FROM account WHERE Email = '$Email'";
+            $Result = $Connection->query($Query);  
+
+            if($Result->num_rows > 0){
+                while($Row = $Result->fetch_assoc()){
+                    $SessionEmail  = $Row['Email'];
+                    $SessionName   = $Row['Username'];
+                    $HashPassword  = $Row['Password'];
+                    
+                    //Verify Password
+                    if(password_verify($Password, $HashPassword)){
+                        session_start();
+                        $_SESSION['LoggedInEmail'] = $SessionEmail;
+                        $_SESSION['LoggedInName']  = $SessionName;
+                        header("Location: index.php");
+                    } else {
+                        $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
+                    }
+                }
+            } else {
+                 $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
+            }
+        }
+    }
+}
+
+
 //Form Validation / XSS / SQLi
 function ValidateFormData($FormData){
     $FormData = trim(stripslashes(htmlspecialchars(strip_tags(str_replace( array( '(', ')' ), '', $FormData  )), ENT_QUOTES )));
@@ -299,7 +351,7 @@ if(isset($_POST['UpdateUserProfile'])){
                 //Insert Data Into Databse
                 if($Name && $UsernameFinal && $Phone && $Message && $Country){
 
-                    $Query = "UPDATE account SET Fullname = '$Name', Username = '$UsernameFinal', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = 'Muhaddisshah@gmail.com'"; // Session Email (Later)
+                    $Query = "UPDATE account SET Fullname = '$Name', Username = '$UsernameFinal', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
                         if($Connection->query($Query) === TRUE) {
                             $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                         } else {
@@ -312,7 +364,7 @@ if(isset($_POST['UpdateUserProfile'])){
             //Insert Data Into Databse
             if($Name && $Phone && $Message && $Country){
 
-                $Query = "UPDATE account SET Fullname = '$Name', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = 'Muhaddisshah@gmail.com'"; // Session Email (Later)
+                $Query = "UPDATE account SET Fullname = '$Name', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
                 if($Connection->query($Query) === TRUE) {
                     $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                 } else {
@@ -348,8 +400,8 @@ if (isset($_POST['UpdatePassword'])) {
 	}
 
 	if ($CPass && $NPass && $CNPass) {
-		//Select User Details from Database From Session Email (Later)
-		$Query = "SELECT * FROM account WHERE Email = 'Muhaddisshah@gmail.com'";
+		//Select User Details from Database From Session Email
+		$Query = "SELECT * FROM account WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
 		$Result = $Connection->query($Query);
 		if ($Result->num_rows > 0) {
 			while ($Row = $Result-> fetch_assoc()) {
@@ -357,7 +409,7 @@ if (isset($_POST['UpdatePassword'])) {
 			}
 		}
 
-		//Check If Current Password is Correct and Update New Password to Session Email (Later)
+		//Check If Current Password is Correct and Update New Password to Session Email
 		if (password_verify($CPass, $CurrentPasswordDB)) {
 
 			//Check if New Password and Confirm New Password are Correct
@@ -365,7 +417,7 @@ if (isset($_POST['UpdatePassword'])) {
 				//Hash New Password and Insert into databse.
 				$HashPassword = password_hash($CPass, PASSWORD_DEFAULT);
 
-				$Query = "UPDATE account SET Password = '$HashPassword' WHERE Email = 'Muhaddisshah@gmail.com'";
+				$Query = "UPDATE account SET Password = '$HashPassword' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
 				if ($Connection->query($Query) === TRUE) {
 					$ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Password Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
 				} else {
@@ -409,7 +461,7 @@ function DisplayUsers(){
 }
 
 
-//Select Account Details of Specific User Session Email or ID (Later)
+//Select Account Details of Specific User Session Email or ID
 function DisplayAccountDetails(){
     global $Connection;
     global $Name;
@@ -419,7 +471,7 @@ function DisplayAccountDetails(){
     global $Message;
     global $Country;
     
-    $Query  = "SELECT * FROM account WHERE Email = 'Muhaddisshah@gmail.com'";
+    $Query  = "SELECT * FROM account WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
     $Result = $Connection->query($Query);
     
     if($Result->num_rows > 0){

@@ -1,6 +1,12 @@
 <?php
 
+    session_start();
     include("Includes/Functions_Admin.php");
+    if(isset($_SESSION['LoggedInEmail'])){
+        header("Location: index.php");
+    }
+
+    LogInUser();
 
 ?>
 
@@ -27,12 +33,12 @@
 					<div class="card fat">
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
-							<form method="POST">
-							 
+                            <?php echo (isset($LoginError)) ? $LoginError : ""; ?>
+							<form action="" method="POST">							 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
-
-									<input id="email" type="email" class="form-control" name="email" value="" required autofocus>
+                                    <?php echo (isset($EmailError)) ? $EmailError : ""; ?>
+									<input id="email" type="email" class="form-control" name="Email" required autofocus>
 								</div>
 
 								<div class="form-group">
@@ -41,17 +47,18 @@
 											Forgot Password?
 										</a>-->
 									</label>
-									<input id="password" type="password" class="form-control" name="password" required data-eye>
+                                    <?php echo (isset($PasswordError)) ? $PasswordError : ""; ?>
+									<input id="password" type="password" class="form-control" name="Password" required data-eye>
 								</div>
 
 								<div class="form-group">
 									<label>
-										<input type="checkbox" name="remember"> Remember Me
+										<input type="checkbox" name="RememberMe"> Remember Me
 									</label>
 								</div>
 
 								<div class="form-group no-margin">
-									<button type="submit" class="btn btn-primary btn-block">
+									<button name="Login" type="submit" class="btn btn-primary btn-block">
 										Login
 									</button>
 								</div>

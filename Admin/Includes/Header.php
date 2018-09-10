@@ -1,6 +1,12 @@
 <?php
 
+    session_start();
     include("Includes/Functions_Admin.php");
+    
+    //Redirect User Back if No LoggedIn Seesion is Set
+    if(!isset($_SESSION['LoggedInEmail'])){
+        header("Location: Login.php");
+    }
 
 ?>
 
@@ -76,7 +82,7 @@
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                     </li>
                     <li>
-                        <a class="profile-pic" href="#"> <img src="<?php echo GravatarImage($Email); ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">Steave</b></a>
+                        <a class="profile-pic" href="#"> <img src="<?php echo GravatarImage($_SESSION['LoggedInEmail']); ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['LoggedInName']; ?></b></a>
                     </li>
                 </ul>
             </div>
