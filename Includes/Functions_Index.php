@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include("Includes/Connection.php");
 
@@ -6,20 +6,23 @@ date_default_timezone_set("Asia/Karachi");
 
 //Form Validation / XSS / SQLi
 function ValidateFormData($FormData) {
-    $FormData = trim(stripslashes(htmlspecialchars(strip_tags(str_replace(array('(',')'), '', $FormData)), ENT_QUOTES)));
+    $FormData = trim(stripslashes(htmlspecialchars(strip_tags(str_replace(array(
+        '(',
+        ')'
+    ), '', $FormData)), ENT_QUOTES)));
     return $FormData;
 }
 
 
 //Select Owner Details From Databse /Index
-function DisplayOwner(){
+function DisplayOwner() {
     global $Connection;
     
     $Query  = "SELECT * FROM homepage";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
             $HomepageImage = $Row['Homepage_Image'];
             $HomepageName  = $Row['Homepage_Name'];
             $HomepageMsg   = $Row['Homepage_Message'];
@@ -29,30 +32,30 @@ function DisplayOwner(){
                 <h4><b>' . $HomepageName . '</b></h4>
                 <p>' . $HomepageMsg . '</p>
             </div>';
-                        
+            
         }
     }
 }
 
 
 //Display Discriotion /Index
-function Description(){
+function Description() {
     global $Connection;
     
     $Query  = "SELECT * FROM homepage";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
-            $Description = $Row['Homepage_Description'];            
-            echo $Description;           
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $Description = $Row['Homepage_Description'];
+            echo $Description;
         }
     }
 }
 
 
 //Display Footer Name /Index
-function Footer(){
+function Footer() {
     global $Connection;
     global $FootherText;
     global $FootherLink;
@@ -60,23 +63,23 @@ function Footer(){
     $Query  = "SELECT * FROM homepage";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
-            $FootherText = $Row['Homepage_Footer_Text'];            
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $FootherText = $Row['Homepage_Footer_Text'];
             $FootherLink = $Row['Homepage_Footer_Link'];
         }
     }
 }
 
 //Display Tags Name /Index
-function Tags(){
+function Tags() {
     global $Connection;
     
     $Query  = "SELECT * FROM tags";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
             $Tags  = $Row['Tag'];
             $TagID = $Row['Tag_ID'];
             echo '<a href="Tags.php?Tag=' . $TagID . '"><span class="w3-tag w3-light-grey w3-small w3-margin-bottom">' . $Tags . '</span></a> ';
@@ -86,23 +89,23 @@ function Tags(){
 
 
 //Display Posts /Index
-function DisplayPostsIndex(){
+function DisplayPostsIndex() {
     global $Connection;
     
-    $Query = "SELECT * FROM blog_post";
+    $Query  = "SELECT * FROM blog_post";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
-            $PostID       = $Row['Post_ID'];
-            $Tag          = $Row['Post_Tag'];
-            $PostTitle    = $Row['Post_Title'];
-            $PostImage    = $Row['Post_Feature_Image'];
-            $PostContent  = $Row['Post_Content'];
-            $PostDate     = $Row['Post_Date'];
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostID      = $Row['Post_ID'];
+            $Tag         = $Row['Post_Tag'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostImage   = $Row['Post_Feature_Image'];
+            $PostContent = $Row['Post_Content'];
+            $PostDate    = $Row['Post_Date'];
             
-            $PostContent = substr($PostContent, 0, 360);            
-            $PostContent = ValidateFormData($PostContent);            
+            $PostContent = substr($PostContent, 0, 360);
+            $PostContent = ValidateFormData($PostContent);
             $PostDate    = date('F j, Y', strtotime($PostDate));
             
             echo '<div class="w3-card-4 w3-margin w3-white">
@@ -121,7 +124,7 @@ function DisplayPostsIndex(){
                         </p>
                     </div>
                     <div class="w3-col m4 w3-hide-small">
-                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">' . GetComments($PostID) . '</span></span>
+                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">' . GetComments($PostID) . '</span></span>
                         </p>
                     </div>
                 </div>
@@ -132,13 +135,13 @@ function DisplayPostsIndex(){
 }
 
 //GetPostCommentNumbers
-function GetComments($PostID){
+function GetComments($PostID) {
     global $Connection;
     
-    $Query = "SELECT * FROM comments WHERE CommentPost_ID = '$PostID'";
+    $Query  = "SELECT * FROM comments WHERE CommentPost_ID = '$PostID'";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
+    if ($Result->num_rows > 0) {
         $Comments = $Result->num_rows;
     } else {
         $Comments = 0;
@@ -149,24 +152,24 @@ function GetComments($PostID){
 
 
 //Select Posts Via Tag /Tags
-function DisplayPostsTag($TagID){
+function DisplayPostsTag($TagID) {
     global $Connection;
     
     
-    $Query = "SELECT * FROM blog_post WHERE Post_Tag = '$TagID'";
+    $Query  = "SELECT * FROM blog_post WHERE Post_Tag = '$TagID'";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
-            $PostID       = $Row['Post_ID'];
-            $Tag          = $Row['Post_Tag'];
-            $PostTitle    = $Row['Post_Title'];
-            $PostImage    = $Row['Post_Feature_Image'];
-            $PostContent  = $Row['Post_Content'];
-            $PostDate     = $Row['Post_Date'];
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostID      = $Row['Post_ID'];
+            $Tag         = $Row['Post_Tag'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostImage   = $Row['Post_Feature_Image'];
+            $PostContent = $Row['Post_Content'];
+            $PostDate    = $Row['Post_Date'];
             
-            $PostContent = substr($PostContent, 0, 360);            
-            $PostContent = ValidateFormData($PostContent);            
+            $PostContent = substr($PostContent, 0, 360);
+            $PostContent = ValidateFormData($PostContent);
             $PostDate    = date('F j, Y', strtotime($PostDate));
             
             echo '<div class="w3-card-4 w3-margin w3-white">
@@ -185,7 +188,7 @@ function DisplayPostsTag($TagID){
                         </p>
                     </div>
                     <div class="w3-col m4 w3-hide-small">
-                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">' . GetComments($PostID) . '</span></span>
+                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">' . GetComments($PostID) . '</span></span>
                         </p>
                     </div>
                 </div>
@@ -199,21 +202,21 @@ function DisplayPostsTag($TagID){
 
 
 // Display Specific Post with Contetnts /Post
-function DisplayPost($PostID){
+function DisplayPost($PostID) {
     global $Connection;
-    $Query = "SELECT * FROM blog_post WHERE Post_ID = '$PostID'";
+    $Query  = "SELECT * FROM blog_post WHERE Post_ID = '$PostID'";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
-            $PostID       = $Row['Post_ID'];
-            $Tag          = $Row['Post_Tag'];
-            $PostTitle    = $Row['Post_Title'];
-            $PostImage    = $Row['Post_Feature_Image'];
-            $PostContent  = $Row['Post_Content'];
-            $PostDate     = $Row['Post_Date'];
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostID      = $Row['Post_ID'];
+            $Tag         = $Row['Post_Tag'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostImage   = $Row['Post_Feature_Image'];
+            $PostContent = $Row['Post_Content'];
+            $PostDate    = $Row['Post_Date'];
             
-            $PostDate    = date('F j, Y', strtotime($PostDate));
+            $PostDate = date('F j, Y', strtotime($PostDate));
             
             echo '<div class="w3-card-4 w3-margin w3-white">
             <div class="w3-center w3-container">
@@ -229,19 +232,19 @@ function DisplayPost($PostID){
         }
     } else {
         header("Location: index.php");
-    }    
+    }
 }
 
 
 //Display Tag By Tag ID /Tags
-function TagByID($TagID){
+function TagByID($TagID) {
     global $Connection;
     
-    $Query = "SELECT * FROM tags WHERE Tag_ID = '$TagID'";
+    $Query  = "SELECT * FROM tags WHERE Tag_ID = '$TagID'";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
             echo $Row['Tag'];
         }
     } else {
@@ -251,27 +254,27 @@ function TagByID($TagID){
 
 
 //Add Comment /Post
-if(isset($_POST['AddComment'])){
+if (isset($_POST['AddComment'])) {
     $Name    = $_POST['Name'];
     $Comment = $_POST['Comment'];
-    $PostID = ValidateFormData($_POST['PostId']);
+    $PostID  = ValidateFormData($_POST['PostId']);
     
-    if(!$Name){
+    if (!$Name) {
         $NameError = "Please Add Your Name";
     } else {
         $Name = ValidateFormData($Name);
     }
     
-    if(!$Comment){
+    if (!$Comment) {
         $CommentError = "Please Add Comment";
     } else {
         $Comment = ValidateFormData($Comment);
     }
     
-    if($Name && $Comment && $PostID){
-        if(is_numeric($PostID) == TRUE){
+    if ($Name && $Comment && $PostID) {
+        if (is_numeric($PostID) == TRUE) {
             $Query = "INSERT INTO comments(CommentPost_ID, Comment_Author, Comment, Comment_Date) VALUES('$PostID', '$Name', '$Comment', CURRENT_TIMESTAMP)";
-            if($Connection->query($Query) === TRUE){
+            if ($Connection->query($Query) === TRUE) {
                 $CommentMessage = '<div class="alert animated bounceInDown w3-panel w3-green w3-display-container"><p>Comment Added Successfully</p></div>';
                 
             } else {
@@ -282,18 +285,18 @@ if(isset($_POST['AddComment'])){
 }
 
 //Display Comments /Post
-function DisplayComments($PostID){
+function DisplayComments($PostID) {
     global $Connection;
     
-    $Query = "SELECT * FROM comments WHERE CommentPost_ID = '$PostID'";
+    $Query  = "SELECT * FROM comments WHERE CommentPost_ID = '$PostID'";
     $Result = $Connection->query($Query);
     
-    if($Result->num_rows > 0){
-        while($Row = $Result->fetch_assoc()){
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
             $CommentAuthor = $Row['Comment_Author'];
             $Comment       = $Row['Comment'];
             
-            echo '<p class="w3-container"><b>' . $CommentAuthor . ': </b>' . $Comment .  '</p><hr>';
+            echo '<p class="w3-container"><b>' . $CommentAuthor . ': </b>' . $Comment . '</p><hr>';
         }
     }
 }
