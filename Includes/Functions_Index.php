@@ -1,15 +1,11 @@
 <?php
 
 include("Includes/Connection.php");
-
 date_default_timezone_set("Asia/Karachi");
 
 //Form Validation / XSS / SQLi
 function ValidateFormData($FormData) {
-    $FormData = trim(stripslashes(htmlspecialchars(strip_tags(str_replace(array(
-        '(',
-        ')'
-    ), '', $FormData)), ENT_QUOTES)));
+    $FormData = trim(stripslashes(htmlspecialchars(strip_tags(str_replace(array('(',')'), '', $FormData)), ENT_QUOTES)));
     return $FormData;
 }
 
@@ -217,7 +213,7 @@ function DisplayPost($PostID) {
             $PostDate    = $Row['Post_Date'];
             
             $PostDate = date('F j, Y', strtotime($PostDate));
-            
+           
             echo '<div class="w3-card-4 w3-margin w3-white">
             <div class="w3-center w3-container">
                 <h3><b>' . strtoupper($PostTitle) . '</b></h3>
@@ -300,7 +296,6 @@ function DisplayComments($PostID) {
         }
     }
 }
-
 
 //Close Connection
 $Connection->error;

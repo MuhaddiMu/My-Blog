@@ -1,5 +1,4 @@
 <?php 
-
 if(isset($_GET['PostID'])){
     $PostID = $_GET['PostID'];    
 } else {

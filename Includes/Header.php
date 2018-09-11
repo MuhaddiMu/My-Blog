@@ -2,12 +2,11 @@
 
     include("Includes/Connection.php");
     include("Includes/Functions_Index.php");
-
 ?>
 
 <!DOCTYPE html>
 <html>
-<title>Info Sec Blog</title>
+<title><?php echo (defined('TITLE')) ? TITLE . " &mdash;" : "" ?> My Own Blog</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
