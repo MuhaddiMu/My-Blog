@@ -79,9 +79,29 @@
                         <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                     </li>
-                    <li>
-                        <a class="profile-pic" href="#"> <img src="<?php echo GravatarImage(ValidateFormData($_COOKIE['LoggedInEmail'])); ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo ValidateFormData(str_rot13($_COOKIE['LoggedInName'])); ?></b></a>
+                    
+                    <li class="dropdown">
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="<?php echo GravatarImage(ValidateFormData($_COOKIE['LoggedInEmail'])); ?>" alt="User Image" width="36" class="img-circle"><b class="hidden-xs"><?php echo ValidateFormData(str_rot13($_COOKIE['LoggedInName'])); ?></b><span class="caret"></span> </a>
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li>
+                                <div class="dw-user-box">
+                                    <div class="u-img"><img src="<?php echo GravatarImage(ValidateFormData($_COOKIE['LoggedInEmail'])); ?>" alt="user"></div>
+                                    <div class="u-text">
+                                        <h4><?php echo ValidateFormData(str_rot13($_COOKIE['LoggedInName'])); ?></h4>
+                                        <p class="text-muted"><?php echo ValidateFormData($_COOKIE['LoggedInEmail']); ?></p><a href="profile.php" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                </div>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="profile.php"><i class="ti-user"></i> My Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="?LogOut"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                        <!-- /.dropdown-user -->
                     </li>
+                    
+                    <!--<li>
+                        <a class="profile-pic" href="#"> <img src= alt="user-img" width="36" class="img-circle"><b class="hidden-xs"></b></a>
+                    </li>-->
                 </ul>
             </div>
             <!-- /.navbar-header -->
