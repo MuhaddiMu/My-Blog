@@ -4,53 +4,7 @@
     <!-- Blog entries -->
     <div class="w3-col l8 s12">
         <!-- Blog entry -->
-        <div class="w3-card-4 w3-margin w3-white">
-            <img src="https://www.w3schools.com/w3images/woods.jpg" alt="Nature" style="width:100%">
-            <div class="w3-container">
-                <h3><b>TITLE HEADING</b></h3>
-                <h5><span class="w3-opacity">April 7, 2014</span></h5>
-            </div>
-
-            <div class="w3-container">
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <div class="w3-row">
-                    <div class="w3-col m8 s12">
-                        <p>
-                            <button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button>
-                        </p>
-                    </div>
-                    <div class="w3-col m4 w3-hide-small">
-                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-
-        <!-- Blog entry -->
-        <div class="w3-card-4 w3-margin w3-white">
-            <img src="https://www.w3schools.com/w3images/bridge.jpg" alt="Norway" style="width:100%">
-            <div class="w3-container">
-                <h3><b>BLOG ENTRY</b></h3>
-                <h5><span class="w3-opacity">April 2, 2014</span></h5>
-            </div>
-
-            <div class="w3-container">
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <div class="w3-row">
-                    <div class="w3-col m8 s12">
-                        <p>
-                            <button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button>
-                        </p>
-                    </div>
-                    <div class="w3-col m4 w3-hide-small">
-                        <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php DisplayPostsIndex(); ?>
         <!-- END BLOG ENTRIES -->
     </div>
 
@@ -58,11 +12,7 @@
     <div class="w3-col l4">
         <!-- About Card -->
         <div class="w3-card w3-margin w3-margin-top">
-            <img src="https://www.w3schools.com/w3images/avatar_g.jpg" style="width:100%">
-            <div class="w3-container w3-white">
-                <h4><b>My Name</b></h4>
-                <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
-            </div>
+            <?php DisplayOwner(); ?>
         </div>
         <hr>
 
@@ -106,12 +56,7 @@
                 <h4>Tags</h4>
             </div>
             <div class="w3-container w3-white">
-                <p><span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
-                </p>
+                <p><?php Tags(); ?></p>
             </div>
         </div>
 

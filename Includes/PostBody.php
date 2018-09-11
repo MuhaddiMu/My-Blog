@@ -1,23 +1,20 @@
+<?php 
+
+if(isset($_GET['PostID'])){
+    $PostID = $_GET['PostID'];    
+} else {
+    header("Location: index.php");
+}
+
+?>
+
 <!-- Grid -->
 <div class="w3-row">
-
+    <div class="w3-container"><?php echo (isset($CommentMessage)) ? $CommentMessage : ""; ?></div>
     <div class="w3-col l8 s12">
 
         <!-- Blog entry -->
-        <div class="w3-card-4 w3-margin w3-white">
-            <div class="w3-center w3-container">
-                <h3><b>MY FIRST BLOG ENTRY</b></h3>
-                <h5><span class="w3-opacity">April 2, 2014</span></h5>
-            </div>
-            <img src="https://www.w3schools.com/w3images/bridge.jpg" alt="Norway" style="width:100%">
-            <div class="w3-container">
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            </div>
-        </div>
+        <?php DisplayPost($PostID); ?>
         <!-- END BLOG ENTRIES -->
 
         <!-- COMMENTS -->
@@ -27,29 +24,26 @@
                 <h4><b>Comments</b></h4>
                 <hr>
             </div>
-
-            <form class="w3-container">
+            <form method="post" action="" class="w3-container">
                 <div class="w3-row-padding">
+                    <p class="w3-text-red"> <?php echo (isset($NameError)) ? $NameError : ""; ?></p>
+                    <p class="w3-text-red"> <?php echo (isset($CommentError)) ? $CommentError : ""; ?></p>
                     <div class="w3-quarter">
-                        <input class="w3-input w3-border w3-round" type="text" placeholder="Your Name">
+                        <input name="Name" class="w3-input w3-border w3-round" type="text" placeholder="Your Name" required>
                     </div>
                     <div class="w3-rest">
-                        <textarea style="resize: none;" rows="1" class="w3-input w3-border w3-round" type="text" placeholder="Your Comment"></textarea>
+                        <textarea name="Comment" style="resize: none;" rows="1" class="w3-input w3-border w3-round" type="text" placeholder="Your Comment" required></textarea>
                     </div>
-
+                    <input name="PostId" value="<?php echo $PostID ?>" type="hidden">
                     <p>
-                        <button type="submit" class="w3-right w3-button w3-white w3-border"><b>Comment</b></button>
+                        <button name="AddComment" type="submit" class="w3-right w3-button w3-white w3-border"><b>Comment</b></button>
                     </p>
                 </div>
             </form>
 
             <hr>
-            <p class="w3-container"><b>Muhaddis: </b>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            <hr>
-            <p class="w3-container"><b>Muhaddis: </b>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            <hr>
-            <p class="w3-container"><b>Muhaddis: </b>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-            <hr>
+            
+            <?php DisplayComments($PostID); ?>
 
         </div>
 
@@ -61,12 +55,9 @@
     <div class="w3-col l4">
         <!-- About Card -->
         <div class="w3-card w3-margin w3-margin-top">
-            <img src="https://www.w3schools.com/w3images/avatar_g.jpg" style="width:100%">
-            <div class="w3-container w3-white">
-                <h4><b>My Name</b></h4>
-                <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
-            </div>
+            <?php DisplayOwner(); ?>
         </div>
+        
         <hr>
 
         <!-- Posts -->
@@ -109,12 +100,7 @@
                 <h4>Tags</h4>
             </div>
             <div class="w3-container w3-white">
-                <p><span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
-                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
-                </p>
+                <p><?php Tags(); ?></p>
             </div>
         </div>
 
@@ -127,3 +113,18 @@
 
 <!-- END w3-content -->
 </div>
+
+<script>
+//Feedback Notification
+$(document).ready(function() {
+    
+    setTimeout(function() {
+     $('.alert').addClass("bounceOutUp");
+    }, 3000)
+    
+    setTimeout(function() {
+     $('.alert').remove();
+    }, 4000)
+    
+});   
+</script>

@@ -1,3 +1,10 @@
+<?php 
+
+    include("Includes/Connection.php");
+    include("Includes/Functions_Index.php");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <title>Info Sec Blog</title>
@@ -7,6 +14,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link href="Admin/css/animate.css" rel="stylesheet">
+<script src="Admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="Admin/plugins/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <link rel="icon" type="image/png" sizes="16x16" href="Admin/plugins/images/favicon.png">
 
 <style>
@@ -24,5 +34,5 @@ and is wrapped around the whole page content, except for the footer in this exam
         <!-- Header -->
         <header class="w3-container w3-center w3-padding-32">
             <a href="http://127.0.0.1/Code/My-Blog/" style="text-decoration:none"><h1><b>Information System Security <i class="fas fa-lock"></i></b></h1></a>
-            <p>Welcome to the blog of <span class="w3-tag">CYBER SECURITY</span></p>
+            <p><?php Description(); ?></p>
         </header>
