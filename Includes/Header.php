@@ -2,6 +2,11 @@
 
     include("Includes/Connection.php");
     include("Includes/Functions_Index.php");
+
+    if(isset($_GET['PostID'])){
+        $PostID = $_GET['PostID'];  
+        GetTitle($PostID);
+    }
 ?>
 
 <!DOCTYPE html>

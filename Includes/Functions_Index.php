@@ -297,6 +297,20 @@ function DisplayComments($PostID) {
     }
 }
 
+
+function GetTitle($PostID) {
+    global $Connection;
+    $Query  = "SELECT * FROM blog_post WHERE Post_ID = '$PostID'";
+    $Result = $Connection->query($Query);
+    
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostTitle   = $Row['Post_Title'];
+            define("TITLE", $PostTitle);
+        }
+    }
+}
+
 //Close Connection
 $Connection->error;
 
