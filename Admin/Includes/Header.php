@@ -1,5 +1,4 @@
 <?php
-
     session_start();
     include("Includes/Functions_Admin.php");
     
@@ -81,7 +80,7 @@
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                     </li>
                     <li>
-                        <a class="profile-pic" href="#"> <img src="<?php echo GravatarImage($_SESSION['LoggedInEmail']); ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo $_SESSION['LoggedInName']; ?></b></a>
+                        <a class="profile-pic" href="#"> <img src="<?php echo GravatarImage(ValidateFormData($_COOKIE['LoggedInEmail'])); ?>" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><?php echo ValidateFormData(str_rot13($_COOKIE['LoggedInName'])); ?></b></a>
                     </li>
                 </ul>
             </div>

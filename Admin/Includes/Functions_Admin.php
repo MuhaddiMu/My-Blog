@@ -1,81 +1,74 @@
 <?php 
-
 include("../Includes/Connection.php");
 
 #Functions_Admin.php For Functioning and Linking or Interacting Admin Panel / Backend Contents with Databse Including Crud Operations
+
 
 date_default_timezone_set("Asia/Karachi");
 
 
 //Login User /Admin/Login
-function LogInUser(){
-    global $Connection;
-    global $EmailError;
-    global $PasswordError;
-    global $SessionEmail;
-    global $SessionEmail;
-    global $SessionID;
-    global $LoginError;
-
-    if(isset($_POST['Login'])){
-        $Email    = $_POST['Email'];
-        $Password = $_POST['Password'];
+if(isset($_POST['Login'])){
+    $Email    = $_POST['Email'];
+    $Password = $_POST['Password'];
         
-        if(!$Email){
-            $EmailError = "<p class='text-danger'>Please Enter Your Email</p>";
-        } else {
-            $Email = ValidateFormData($Email);
-        }
+    if(!$Email){
+        $EmailError = "<p class='text-danger'>Please Enter Your Email</p>";
+    } else {
+        $Email = ValidateFormData($Email);
+    }
         
-        if(!$Password){
-            $PasswordError = "<p class='text-danger'>Please Enter Your Password</p>";
-        }
+    if(!$Password){
+        $PasswordError = "<p class='text-danger'>Please Enter Your Password</p>";
+    }
         
-        if(!empty($_POST['RememberMe'])){
-            $RememberMe = $_POST['RememberMe'];
-        }
+    if(!empty($_POST['RememberMe'])){
+        $RememberMe = $_POST['RememberMe'];
+    }
         
-        if($Email && $Password){
+    if($Email && $Password){
             
-            $Query = "SELECT * FROM account WHERE Email = '$Email'";
-            $Result = $Connection->query($Query);  
+        $Query = "SELECT * FROM account WHERE Email = '$Email'";
+        $Result = $Connection->query($Query);  
 
-            if($Result->num_rows > 0){
-                while($Row = $Result->fetch_assoc()){
-                    $SessionEmail  = $Row['Email'];
-                    $SessionID     = $Row['ID'];
-                    $SessionName   = $Row['Username'];
-                    $HashPassword  = $Row['Password'];
+        if($Result->num_rows > 0){
+            while($Row = $Result->fetch_assoc()){
+                $SessionEmail  = $Row['Email'];
+                $SessionID     = $Row['ID'];
+                $SessionName   = $Row['Username'];
+                $HashPassword  = $Row['Password'];
                     
-                    //Verify Password
-                    if(password_verify($Password, $HashPassword)){
-                        session_start();
-                        
-                        //Remember Me Functionality
-                        if(isset($RememberMe)){
+                //Verify Password
+                if(password_verify($Password, $HashPassword)){
+                    session_start();
+                    $_SESSION['LoggedInEmail'] = $SessionEmail;
+                    $_SESSION['LoggedInName']  = $SessionName;
+                    $_SESSION['LoggedInID']    = $SessionID;
+                    
+                    //Remember Me Functionality
+                    if(!isset($RememberMe)){
+                        //Cookie for 24 Hours
+                        $OneDayCookie = time() + (24 * 60 * 60);
+                        setcookie('LoggedIn', $_SESSION['LoggedInEmail'], $OneDayCookie);
+                        setcookie('LoggedInEmail', $_SESSION['LoggedInEmail'], $OneDayCookie);
+                        setcookie('LoggedInName', str_rot13($_SESSION['LoggedInName']), $OneDayCookie);
                             
-                            if($RememberMe == "On"){
-                                $_SESSION['RememberMe'] = $SessionID;
-                                setcookie('RememberMeLogIn', $_SESSION['LoggedInEmail'], time() + (7 * 24 * 60 * 60));
-                                $_SESSION['LoggedInEmail'] = $SessionEmail;
-                                $_SESSION['LoggedInName']  = $SessionName;
-                                $_SESSION['LoggedInID']    = $SessionID;
-                            }
-                        } else {
-                            setcookie('LoggedIn', $_SESSION['LoggedInEmail'], time() + (24 * 60 * 60));
-                            $_SESSION['LoggedInEmail'] = $SessionEmail;
-                            $_SESSION['LoggedInName']  = $SessionName;
-                            $_SESSION['LoggedInID']    = $SessionID;
-                        }
-                        
-                        header("Location: index.php");
                     } else {
-                        $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
+                        //Cookie for one Week
+                        $OneWeekCookie = time() + (7 * 24 * 60 * 60);
+                        setcookie('RememberMeLogIn', $_SESSION['LoggedInEmail'], $OneWeekCookie);
+                        setcookie('LoggedInEmail', $_SESSION['LoggedInEmail'], $OneWeekCookie);
+                        setcookie('LoggedInName', str_rot13($_SESSION['LoggedInName']), $OneWeekCookie);
                     }
+                        
+                    header("Location: index.php");
+                    die();
+                } else {
+                    $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
                 }
-            } else {
-                 $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
             }
+        } else {
+             $LoginError = "<p class='text-danger'>Incorrect Email or Password. Please Try Again.</p>";
         }
     }
 }

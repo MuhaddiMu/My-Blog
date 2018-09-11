@@ -6,8 +6,6 @@
         header("Location: index.php");
     }
 
-    LogInUser();
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +32,7 @@
 						<div class="card-body">
 							<h4 class="card-title">Login</h4>
                             <?php echo (isset($LoginError)) ? $LoginError : ""; ?>
-							<form action="" method="POST">							 
+							<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">							 
 								<div class="form-group">
 									<label for="email">E-Mail Address</label>
                                     <?php echo (isset($EmailError)) ? $EmailError : ""; ?>
