@@ -150,17 +150,4 @@ function DisplayImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-//Feedback Notification
-$(document).ready(function() {
-    
-    setTimeout(function() {
-     $('.alert').addClass("bounceOutUp");
-    }, 3000)
-    
-    setTimeout(function() {
-     $('.alert').remove();
-    }, 4000)
-    
-});
 </script>

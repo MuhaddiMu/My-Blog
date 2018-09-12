@@ -146,6 +146,19 @@
  	});
  });
 
+//Feedback Notification
+$(document).ready(function() {
+    
+    setTimeout(function() {
+     $('.alert').addClass("bounceOutUp");
+    }, 3000)
+    
+    setTimeout(function() {
+     $('.alert').remove();
+    }, 4000)
+    
+});    
+
 /* Toogle Password On Profile Page */
    $(".CPass, .NPass, .CNPass").click(function() {
        $(this).toggleClass("fa-eye fa-eye-slash");

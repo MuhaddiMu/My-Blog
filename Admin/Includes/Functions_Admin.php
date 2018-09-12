@@ -356,6 +356,7 @@ if (isset($_POST['UpdateUserProfile'])) {
         $Phone = ValidateFormData($Phone);
     } //preg_match("/^[0-9]{11}$/", $Phone)
     else {
+        $Phone = "";
         $PhoneError = "<p class='text-danger'>Please Use Your Valid Phone Number</p>";
     }
     
@@ -960,6 +961,47 @@ function PostVisits($PostID){
     }  
 }
 
+
+//Display Total Posts /Index
+function TotalPostsCount(){
+    global $Connection;
+    
+    $Query = "SELECT COUNT(*) AS Total FROM blog_post";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()){
+        echo $Row['Total'];
+        }
+    }
+}
+
+
+//Display Total Visit /Index
+function TotalVisit(){
+    global $Connection;
+    
+    $Query = "SELECT * FROM total_visits";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()){
+        echo $Row['Total_Visits'];
+        }
+    }
+}
+
+
+//Display Total Page Views /Index
+function TotalPageViews(){
+    global $Connection;
+    
+    $Query = "SELECT SUM(post_visits) AS Total FROM post_visits";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()){
+        echo $Row['Total'];
+        }
+    }
+}
 
 //Close Connection
 $Connection->error;

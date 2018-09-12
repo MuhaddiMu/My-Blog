@@ -35,7 +35,7 @@
                             <li>
                                 <div id="sparklinedash3"></div>
                             </li>
-                            <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info">911</span></li>
+                            <li class="text-right"><i class="ti-arrow-up text-info"></i> <span class="counter text-info"><?php echo TotalPostsCount(); ?></span></li>
                         </ul>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                             <li>
                                 <div id="sparklinedash"></div>
                             </li>
-                            <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success">659</span></li>
+                            <li class="text-right"><i class="ti-arrow-up text-success"></i> <span class="counter text-success"><?php TotalVisit(); ?></span></li>
                         </ul>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                             <li>
                                 <div id="sparklinedash2"></div>
                             </li>
-                            <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple">869</span></li>
+                            <li class="text-right"><i class="ti-arrow-up text-purple"></i> <span class="counter text-purple"><?php TotalPageViews(); ?></span></li>
                         </ul>
                     </div>
                 </div>
@@ -156,3 +156,13 @@
     include("Includes/Footer.php");
 
 ?>
+<script>
+//Remove Parameters                                     
+$(document).ready(function(){
+    var uri = window.location.toString();
+	if (uri.indexOf("?") > 0) {
+	    var clean_uri = uri.substring(0, uri.indexOf("?"));
+	    window.history.replaceState({}, document.title, clean_uri);
+	}
+});
+</script>

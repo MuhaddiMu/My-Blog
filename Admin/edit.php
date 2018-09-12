@@ -89,17 +89,3 @@
     include("Includes/Footer.php");
 
 ?>
-<script>
-//Feedback Notification
-$(document).ready(function() {
-    
-    setTimeout(function() {
-     $('.alert').addClass("bounceOutUp");
-    }, 3000)
-    
-    setTimeout(function() {
-     $('.alert').remove();
-    }, 4000)
-    
-});    
-</script>

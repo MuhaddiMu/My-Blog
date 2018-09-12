@@ -68,20 +68,6 @@ if(isset($_GET['Delete'])){
 ?>
 
 <script>
-//Feedback Notification
-$(document).ready(function() {
-    
-    setTimeout(function() {
-     $('.alert').addClass("bounceOutUp");
-    }, 3000)
-    
-    setTimeout(function() {
-     $('.alert').remove();
-    }, 4000)
-    
-});
-    
-    
 //Remove Parameters                                     
 $(document).ready(function(){
     var uri = window.location.toString();

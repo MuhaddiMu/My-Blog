@@ -156,20 +156,6 @@
 
 ?>
 <script>
-//Feedback Notification
-$(document).ready(function() {
-    
-    setTimeout(function() {
-     $('.alert').addClass("bounceOutUp");
-    }, 3000)
-    
-    setTimeout(function() {
-     $('.alert').remove();
-    }, 4000)
-    
-});
-    
-    
 //Match New Password and Confirm New Password
 var NPass = document.getElementById("NPass")
   , CNPass = document.getElementById("CNPass");
