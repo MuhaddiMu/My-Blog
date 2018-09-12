@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-md-4 col-xs-12">
                     <div class="white-box">
-                        <div class="user-bg"> <img width="100%" height="100%" alt="user" src="plugins/images/large/img1.jpg">
+                        <div class="user-bg"> <img width="100%" height="100%" alt="user" src="https://cdn.allwallpaper.in/wallpapers/900x600/1637/cityscapes-night-dubai-900x600-wallpaper.jpg">
                             <div class="overlay-box">
                                 <div class="user-content">
                                     <a href=""><img src="<?php echo GravatarImage($Email); ?>" class="thumb-lg img-circle" alt="Username"></a>
