@@ -899,14 +899,12 @@ function DisplayRecentPostsIndex() {
             if (strlen($PostTitle) > 30) {
                 $PostTitle = $PostTitle . "...";
             } //strlen($PostTitle) > 30
-            
-            //Display Post Update Visits (Later)
             echo '<tr>
                     <td>' . ++$Number . '</td>
                     <td class="txt-oflo">' . $PostTitle . '</td>
                     <td>' . DisplayTagIndex($PostTag) . '</td>
                     <td class="txt-oflo">' . $PostDate . '</td>
-                    <td class="txt-oflo">1337</td>
+                    <td class="txt-oflo">' . PostVisits($PostID) . '</td>
                   </tr>';
         } //$Row = $Result->fetch_assoc()
     } //$Result->num_rows > 0
@@ -947,6 +945,20 @@ if (isset($_REQUEST['LogOut'])) {
     header("Location: Login.php");
     die();
 } //isset($_REQUEST['LogOut'])
+
+
+//Show Post Visits /Index
+function PostVisits($PostID){
+    global $Connection;
+    
+    $Query = "SELECT * FROM post_visits WHERE Post_ID = '$PostID'";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            return $Row['Post_Visits'];
+        }
+    }  
+}
 
 
 //Close Connection

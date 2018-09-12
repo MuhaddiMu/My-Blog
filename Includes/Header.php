@@ -3,6 +3,10 @@
     include("Includes/Connection.php");
     include("Includes/Functions_Index.php");
 
+    //Update Website Stat
+    $Query = "UPDATE total_visits SET Total_Visits=Total_Visits+1";
+    $Result = $Connection->query($Query);
+
     if(isset($_GET['PostID'])){
         $PostID = $_GET['PostID'];  
         GetTitle($PostID);

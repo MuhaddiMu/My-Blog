@@ -330,6 +330,60 @@ function GetTitle($PostID) {
 }
 
 
+//Display Popular Posts /Index
+function PopularPosts(){
+    global $Connection;
+    
+    $Query = "SELECT * FROM post_visits ORDER BY Post_Visits DESC LIMIT 4";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostID = $Row['Post_ID'];
+            $PostVisits = $Row['Post_Visits'];
+            IDToPost($PostID);
+        
+        }
+    }
+}
+
+
+//PostID to Post Top Function
+function IDToPost($PostID){
+   global $Connection;
+    
+    $Query = "SELECT * FROM blog_post WHERE Post_ID = '$PostID'";
+    $Result = $Connection->query($Query);
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            $PostID      = $Row['Post_ID'];
+            $Tag         = $Row['Post_Tag'];
+            $PostTitle   = $Row['Post_Title'];
+            $PostImage   = $Row['Post_Feature_Image'];
+            
+            echo '<li class="w3-padding-16">
+                    <img src="' . $PostImage . '" alt="Popular Post" class="w3-left w3-margin-right" style="width:50px; height:50px">
+                    <span class="w3-large"><a style="text-decoration: none;" href="Post.php?PostID='. $PostID .'">' . $PostTitle . '</a></span>
+                    <br>
+                    <span>' . TagByPostTag($Tag) . '</span>
+                </li>';
+        }
+    }
+}  
+
+//Display Tag By Tag ID Top Function
+function TagByPostTag($TagID) {
+    global $Connection;
+    
+    $Query  = "SELECT * FROM tags WHERE Tag_ID = '$TagID'";
+    $Result = $Connection->query($Query);
+    
+    if ($Result->num_rows > 0) {
+        while ($Row = $Result->fetch_assoc()) {
+            return $Row['Tag'];
+        }
+    }
+}
+
 //Close Connection
 $Connection->error;
 
