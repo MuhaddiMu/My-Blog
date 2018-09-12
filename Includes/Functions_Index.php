@@ -87,12 +87,27 @@ function Tags() {
 //Display Posts /Index
 function DisplayPostsIndex() {
     global $Connection;
+    global $PageNo;
+    global $TotalPages;
     
-    $Query  = "SELECT * FROM blog_post";
+    if(isset($_GET['Page'])){
+        $PageNo = $_GET['Page'];
+    } else {
+        $PageNo = 1;
+    }
+    
+    $NumberOfRecordsPerPage = 2;
+    $Offset = ($PageNo - 1) * $NumberOfRecordsPerPage;
+    
+    $TotalPagesQuery    = "SELECT COUNT(*) FROM blog_post";
+    $TotalPagesResult   = $Connection->query($TotalPagesQuery);
+    $TotalRows          = mysqli_fetch_array($TotalPagesResult)[0];
+    $TotalPages         = ceil($TotalRows / $NumberOfRecordsPerPage);
+    
+    $Query = "SELECT * FROM blog_post LIMIT $Offset, $NumberOfRecordsPerPage";
     $Result = $Connection->query($Query);
-    
-    if ($Result->num_rows > 0) {
-        while ($Row = $Result->fetch_assoc()) {
+    if($Result->num_rows > 0){
+        while ($Row = $Result->fetch_assoc()){
             $PostID      = $Row['Post_ID'];
             $Tag         = $Row['Post_Tag'];
             $PostTitle   = $Row['Post_Title'];
@@ -126,7 +141,10 @@ function DisplayPostsIndex() {
                 </div>
             </div>
         </div><hr>';
+            
         }
+    } else {
+        header("Location: index.php");
     }
 }
 
@@ -310,6 +328,7 @@ function GetTitle($PostID) {
         }
     }
 }
+
 
 //Close Connection
 $Connection->error;

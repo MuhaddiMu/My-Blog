@@ -53,6 +53,7 @@ if (isset($_POST['Login'])) {
                         setcookie('LoggedIn', $_SESSION['LoggedInEmail'], $OneDayCookie);
                         setcookie('LoggedInEmail', $_SESSION['LoggedInEmail'], $OneDayCookie);
                         setcookie('LoggedInName', str_rot13($_SESSION['LoggedInName']), $OneDayCookie);
+                        setcookie('LoggedInID', str_rot13($_SESSION['LoggedInID']), $OneDayCookie);
                         
                     } //!isset($RememberMe)
                     else {
@@ -61,6 +62,7 @@ if (isset($_POST['Login'])) {
                         setcookie('RememberMeLogIn', $_SESSION['LoggedInEmail'], $OneWeekCookie);
                         setcookie('LoggedInEmail', $_SESSION['LoggedInEmail'], $OneWeekCookie);
                         setcookie('LoggedInName', str_rot13($_SESSION['LoggedInName']), $OneWeekCookie);
+                        setcookie('LoggedInID', str_rot13($_SESSION['LoggedInID']), $OneWeekCookie);
                     }
                     
                     header("Location: index.php");
@@ -390,7 +392,7 @@ if (isset($_POST['UpdateUserProfile'])) {
                 //Insert Data Into Databse
                 if ($Name && $UsernameFinal && $Phone && $Message && $Country) {
                     
-                    $Query = "UPDATE account SET Fullname = '$Name', Username = '$UsernameFinal', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
+                    $Query = "UPDATE account SET Fullname = '$Name', Username = '$UsernameFinal', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_COOKIE['LoggedInEmail'] . "'";
                     if ($Connection->query($Query) === TRUE) {
                         $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                     } //$Connection->query($Query) === TRUE
@@ -405,7 +407,7 @@ if (isset($_POST['UpdateUserProfile'])) {
             //Insert Data Into Databse
             if ($Name && $Phone && $Message && $Country) {
                 
-                $Query = "UPDATE account SET Fullname = '$Name', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
+                $Query = "UPDATE account SET Fullname = '$Name', Phone = '$Phone', Message = '$Message', Country = '$Country' WHERE Email = '" . $_COOKIE['LoggedInEmail'] . "'";
                 if ($Connection->query($Query) === TRUE) {
                     $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Profile Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                 } //$Connection->query($Query) === TRUE
@@ -443,7 +445,7 @@ if (isset($_POST['UpdatePassword'])) {
     
     if ($CPass && $NPass && $CNPass) {
         //Select User Details from Database From Session Email
-        $Query  = "SELECT * FROM account WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
+        $Query  = "SELECT * FROM account WHERE Email = '" . $_COOKIE['LoggedInEmail'] . "'";
         $Result = $Connection->query($Query);
         if ($Result->num_rows > 0) {
             while ($Row = $Result->fetch_assoc()) {
@@ -459,7 +461,7 @@ if (isset($_POST['UpdatePassword'])) {
                 //Hash New Password and Insert into databse.
                 $HashPassword = password_hash($CPass, PASSWORD_DEFAULT);
                 
-                $Query = "UPDATE account SET Password = '$HashPassword' WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
+                $Query = "UPDATE account SET Password = '$HashPassword' WHERE Email = '" . $_COOKIE['LoggedInEmail'] . "'";
                 if ($Connection->query($Query) === TRUE) {
                     $ProfileMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Password Updated Successfully.<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
                 } //$Connection->query($Query) === TRUE
@@ -515,7 +517,7 @@ function DisplayAccountDetails() {
     global $Message;
     global $Country;
     
-    $Query  = "SELECT * FROM account WHERE Email = '" . $_SESSION['LoggedInEmail'] . "'";
+    $Query  = "SELECT * FROM account WHERE Email = '" . $_COOKIE['LoggedInEmail'] . "'";
     $Result = $Connection->query($Query);
     
     if ($Result->num_rows > 0) {
@@ -594,7 +596,7 @@ if (isset($_POST['AddPost'])) {
                     // Insert Image Path to Databse.
                     $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
                     
-                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '" . $_SESSION['LoggedInID'] . "', CURRENT_TIMESTAMP)";
+                    $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '" . $_COOKIE['LoggedInID'] . "', CURRENT_TIMESTAMP)";
                     
                     if ($Connection->query($Query) === TRUE) {
                         $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">New Post Added Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';
@@ -684,7 +686,7 @@ function EditPost() {
                     
                     if ($PostTitle && $PostContent && $PostTag) {
                         
-                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '" . $_SESSION['LoggedInID'] . "', Post_Date = CURRENT_TIMESTAMP WHERE Post_ID = '$EditPostID'";
+                        $Query = "UPDATE blog_post SET Post_Tag = '$PostTag', Post_Title = '$PostTitle', Post_Content = '$PostContent', Posted_By = '" . $_COOKIE['LoggedInID'] . "', Post_Date = CURRENT_TIMESTAMP WHERE Post_ID = '$EditPostID'";
                         
                         if ($Connection->query($Query) === TRUE) {
                             $PostMsg = '<div class="animated bounceInDown alert alert-success alert-dismissible show" role="alert">Post Updated Successfully<a href="#" data-dismiss="alert" class="rotate close" aria-hidden="true">&times;</a></div>';

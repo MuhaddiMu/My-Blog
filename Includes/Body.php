@@ -66,6 +66,13 @@
     <!-- END GRID -->
 </div>
 <br>
-
+<div class="w3-center">
+    <div class="w3-bar w3-border w3-round">
+      <b><a href="index.php" class="w3-bar-item w3-button">First</a></b>
+      <b><a href="<?php if($PageNo <= 1){echo "#"; } else { echo "?Page=".($PageNo - 1);} ?>" class="<?php if($PageNo <= 1){echo "w3-disabled"; } ?> w3-bar-item w3-button">&laquo;</a></b>
+      <b><a href="<?php if($PageNo >= $TotalPages){ echo "#"; } else { echo "?Page=".($PageNo + 1); } ?>" class="<?php if($PageNo >= $TotalPages){ echo "w3-disabled"; } ?> w3-button">&raquo;</a></b>
+      <b><a href="?Page=<?php echo $TotalPages; ?>" class="w3-button">Last</a></b>
+    </div>
+</div>
 <!-- END w3-content -->
 </div>
