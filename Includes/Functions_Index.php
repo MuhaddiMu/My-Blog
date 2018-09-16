@@ -120,7 +120,7 @@ function DisplayPostsIndex() {
             $PostDate    = $Row['Post_Date'];
             
             $PostContent = substr($PostContent, 0, 360);
-            $PostContent = ValidateFormData($PostContent);
+            $PostContent = ValidateFormData($PostContent) . "...";
             $PostDate    = date('F j, Y', strtotime($PostDate));
             
             echo '<div class="w3-card-4 w3-margin w3-white">

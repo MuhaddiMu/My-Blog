@@ -41,6 +41,6 @@ and is wrapped around the whole page content, except for the footer in this exam
 
         <!-- Header -->
         <header class="w3-container w3-center w3-padding-32">
-            <a href="http://127.0.0.1/Code/My-Blog/" style="text-decoration:none"><h1><b>Information System Security <i class="fas fa-lock"></i></b></h1></a>
+            <a href="http://127.0.0.1/My-Blog/" style="text-decoration:none"><h1><b>Information System Security <i class="fas fa-lock"></i></b></h1></a>
             <p><?php Description(); ?></p>
         </header>

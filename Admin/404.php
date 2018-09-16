@@ -10,13 +10,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="https://tinyurl.com/y6uo9kku">
     <title>Error 404 &mdash; My Own Blog</title>
     <!-- Bootstrap Core CSS -->
-    <link href="http://127.0.0.1/Code/My-Blog/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://127.0.0.1/My-Blog/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- animation CSS -->
-    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/animate.css" rel="stylesheet">
+    <link href="http://127.0.0.1/My-Blog/Admin/css/animate.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/style.css" rel="stylesheet">
+    <link href="http://127.0.0.1/My-Blog/Admin/css/style.css" rel="stylesheet">
     <!-- color CSS -->
-    <link href="http://127.0.0.1/Code/My-Blog/Admin/css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="http://127.0.0.1/My-Blog/Admin/css/colors/default.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
