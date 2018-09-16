@@ -168,7 +168,7 @@ if (isset($_POST['UpdateProfile'])) {
                 $Dstn        = "plugins/images/" . $FileNewName;
                 if (move_uploaded_file($FileTmp, $Dstn)) {
                     // Insert Image Path to Databse 
-                    $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
+                    $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/My-Blog/Admin/' . $Dstn;
                     $Query     = "UPDATE homepage SET Homepage_Image = '$ImagePath'";
                     $Result    = $Connection->query($Query);
                 } //move_uploaded_file($FileTmp, $Dstn)
@@ -595,7 +595,7 @@ if (isset($_POST['AddPost'])) {
                 if (move_uploaded_file($FileTmp, $Dstn)) {
                     
                     // Insert Image Path to Databse.
-                    $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/CODE/My-Blog/Admin/' . $Dstn;
+                    $ImagePath = 'http://' . $_SERVER["HTTP_HOST"] . '/My-Blog/Admin/' . $Dstn;
                     
                     $Query = "INSERT INTO blog_post(Post_Tag, Post_Title, Post_Feature_Image, Post_Content, Posted_By, Post_Date) VALUES('$PostTag', '$PostTitle', '$ImagePath', '$PostContent', '" . $_COOKIE['LoggedInID'] . "', CURRENT_TIMESTAMP)";
                     
