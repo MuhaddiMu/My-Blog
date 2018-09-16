@@ -34,7 +34,7 @@ function DisplayOwner() {
 }
 
 
-//Display Discriotion /Index
+//Display Discription /Index
 function Description() {
     global $Connection;
     
@@ -96,6 +96,10 @@ function DisplayPostsIndex() {
         $PageNo = 1;
     }
     
+    if($PageNo == 0){
+        header("Location: index.php");
+    }
+    
     $NumberOfRecordsPerPage = 2;
     $Offset = ($PageNo - 1) * $NumberOfRecordsPerPage;
     
@@ -144,7 +148,9 @@ function DisplayPostsIndex() {
             
         }
     } else {
-        header("Location: index.php");
+        echo '<div class="w3-card-4 w3-margin w3-white">
+            <div class="w3-container"><h3>Sorry! Nothing to see here. No Posts!<h3></div>
+        </div><hr>';
     }
 }
 
@@ -210,7 +216,7 @@ function DisplayPostsTag($TagID) {
         </div><hr>';
         }
     } else {
-        echo '<div class="w3-card-4 w3-margin w3-white"><div class="w3-container"><h3><b>Sorry! Nothing to see here. No Posts!</h3></b></div></div>';
+        echo '<div class="w3-card-4 w3-margin w3-white"><div class="w3-container"><h3>Sorry! Nothing to see here. No Posts!</h3></div></div>';
     }
 }
 
