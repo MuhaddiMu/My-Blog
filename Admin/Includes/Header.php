@@ -98,10 +98,6 @@
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>
-                    
-                    <!--<li>
-                        <a class="profile-pic" href="#"> <img src= alt="user-img" width="36" class="img-circle"><b class="hidden-xs"></b></a>
-                    </li>-->
                 </ul>
             </div>
             <!-- /.navbar-header -->
