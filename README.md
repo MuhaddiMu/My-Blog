@@ -27,8 +27,9 @@ The Blog has one Frontend and one Backend. Every user can create and manage acco
  - Recent Posts
  - Recent Comments with Delete Functionality
  - To Do List
- - 
+
 **Profile** 
+
  - User Image
  - Full Name
  - Email
