@@ -113,7 +113,7 @@ CREATE TABLE `homepage` (
 --
 
 INSERT INTO `homepage` (`Homepage_Image`, `Homepage_Name`, `Homepage_Message`, `Homepage_Description`, `Homepage_Footer_Text`, `Homepage_Footer_Link`) VALUES
-('http://127.0.0.1/CODE/My-Blog/Admin/plugins/images/UserAvatar.jpg', 'Muhammad Muhaddis', 'Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with yours. ~Muhaddis', 'Welcome to the blog of CYBER SECURITY', 'Muhaddis', 'https://www.muhaddis.info/');
+('http://127.0.0.1/My-Blog/Admin/plugins/images/UserAvatar.jpg', 'Muhammad Muhaddis', 'Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with yours. ~Muhaddis', 'Welcome to the blog of CYBER SECURITY', 'Muhaddis', 'https://www.muhaddis.info/');
 
 -- --------------------------------------------------------
 
